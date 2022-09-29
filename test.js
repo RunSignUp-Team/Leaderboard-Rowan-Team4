@@ -13,5 +13,6 @@ fetch('https://runsignup.com/Rest/races?api_key=llq6HUNrfmBZa3VkQdAKNHS0eUZ1EFij
     for (let i = 0; i < 50; i++) {
       raceObject = user.races[i];
       console.log(raceObject.race.race_id);
+      console.log(raceObject.race.events[0].event_id);
     }
   })
