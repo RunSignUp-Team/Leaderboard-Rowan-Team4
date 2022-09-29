@@ -9,6 +9,9 @@ fetch('https://runsignup.com/Rest/races?api_key=llq6HUNrfmBZa3VkQdAKNHS0eUZ1EFij
     return response.json();
   })
   .then(user => {
-    console.log(user);
-  })
 
+    for (let i = 0; i < 50; i++) {
+      raceObject = user.races[i];
+      console.log(raceObject.race.race_id);
+    }
+  })
