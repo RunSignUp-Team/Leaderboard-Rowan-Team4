@@ -33,7 +33,7 @@ fetch('https://runsignup.com/Rest/races?api_key=' + apikey + ' &api_secret=' + s
 
 // grabs result info from a specified race id + event id combo, then displays place order, name & time of each finisher
 // race id and event id can be inserted into the link through concatenation like how apikey and secret are
-fetch('https://runsignup.com/Rest/race/123467/results/get-results?api_key=' + apikey + '&api_secret=' + secret + '&format=json&event_id=567423&include_total_finishers=T&include_split_time_ms=F&supports_nb=F&page=1&results_per_page=50')
+fetch('https://runsignup.com/Rest/race/21/results/get-results?api_key=' + apikey +'&api_secret=' + secret + '&format=json&event_id=537625&include_total_finishers=T&include_split_time_ms=F&supports_nb=F&page=1&results_per_page=500')
   .then(response => {
     return response.json();
    })
@@ -43,7 +43,7 @@ fetch('https://runsignup.com/Rest/race/123467/results/get-results?api_key=' + ap
 
     for (let i = 0; i < user.individual_results_sets[0].num_finishers; i++){
       playerObject = (user.individual_results_sets[0].results[i]);
-      console.log(playerObject.place + "\t" + playerObject.first_name + " " + playerObject.last_name + "\t\t" +playerObject.clock_time);
+      console.log(playerObject.place + "\t" + playerObject.first_name + " " + playerObject.last_name + "\t\t" +playerObject.chip_time);
     }
 
   })
