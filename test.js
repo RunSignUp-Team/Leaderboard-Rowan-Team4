@@ -15,20 +15,44 @@ fetch('https://runsignup.com/Rest/races?api_key=' + apikey + ' &api_secret=' + s
     // can display id's for 50 races, 10 for testing purposes
     for (let i = 0; i < 10; i++) {
       raceObject = user.races[i];
-      console.log(i + "  \nRace ID: " + raceObject.race.race_id, raceObject.race.name);
+     // console.log(i + "  \nRace ID: " + raceObject.race.race_id, raceObject.race.name);
 
       var events = "";
 
       // some races have multiple events, group race id and their event id's together
       // concatenating into string for console printing purposes, event id is an integer
       for(let j = 0; raceObject.race.events[j] != null; j++) {
-          console.log([raceObject.race.race_id, raceObject.race.events[j].event_id , raceObject.race.events[j].name]);
+          array2.push([raceObject.race.race_id, raceObject.race.events[j].event_id , raceObject.race.events[j].name]);
       }
       
-      console.log(array2);
 
     }
-  })
+
+    const sqlite3 = require('sqlite3').verbose();
+
+  let db = new sqlite3.Database('db.db', sqlite3.OPEN_READWRITE, (err) => {
+      if (err){
+          return console.error(err.message);
+      }
+  });
+  
+  // create the statement for the insertion of just ONE record
+  let insertionQuery = 
+    "INSERT INTO Event (race_id, event_id, event_name) " +
+    "VALUES (?, ?, ?)"; 
+  
+  let statement = db.prepare(insertionQuery);
+  
+  
+  for (var i = 0; i < array2.length; i++) 
+  {
+      statement.run(array2[i], function (err) { 
+          if (err) throw err;
+      });
+  }
+});
+
+  
 
 
 
