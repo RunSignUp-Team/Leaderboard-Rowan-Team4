@@ -1,0 +1,33 @@
+/*h1,
+li,*/
+p {
+    color: black;
+    width: 500px; /*creates a width around the paragraph texts*/
+    border: 1px solid black; /*makes the width border black with size 1px*/
+
+  }
+
+  /*Changes the header/title of the page*/
+  h1 { 
+    color: rgb(225, 0, 255);
+    width: 350px; /*creates a width around the paragraph texts*/
+    border: 1px solid black; /*makes the width border black with size 1px*/
+    background-color: aliceblue;
+
+    margin: 0 auto;
+  }
+
+/*Changes the page color*/
+  body
+    {
+      background-color: bisque; 
+    }
+
+    /*Format the image/logo to the center of the page*/
+    .logo
+    {
+      display: block;
+      margin: 0 auto;
+    }
+
+  
