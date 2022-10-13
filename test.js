@@ -31,21 +31,20 @@ fetch('https://runsignup.com/Rest/race/21/results/get-results?api_key=' + apikey
   });
   
   // create the statement for the insertion of just ONE record
-  let artistQuery = 
+  let insertionQuery = 
     "INSERT INTO Test (place, first_name, last_name, result_time ) " +
     "VALUES (?, ?, ?, ?)"; 
   
-  let statement = db.prepare(artistQuery);
+  let statement = db.prepare(insertionQuery);
   
   
-  for (var i = 0; i < array1.length; i++) {
+  for (var i = 0; i < array1.length; i++) 
+  {
       statement.run(array1[i], function (err) { 
           if (err) throw err;
       });
   }
-  
-
-  });
+});
 
   
   

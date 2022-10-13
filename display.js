@@ -10,12 +10,12 @@ let db = new sqlite3.Database('db.db', sqlite3.OPEN_READ, (err) => {
 
 // create the statement for the insertion of just ONE record
 let query = 
-  `select ? from Test`; 
+  `select place, first_name, last_name, result_time from Test`; // Cannot use ? for some reason to input which fields we want returned
 
-db.each(query, ['first_name'], (err, row) => {
+db.each(query, (err, row) => {
     if (err) {
         throw err;
     }
-    console.log(`${row.first_name} ${row.last_name}`); //Displaying as undefined for some reason. 
+    console.log(`${row.place} ${row.first_name} ${row.last_name} ${row.result_time}` );
 });
 
