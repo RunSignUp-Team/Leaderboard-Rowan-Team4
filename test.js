@@ -15,14 +15,14 @@ fetch('https://runsignup.com/Rest/races?api_key=' + apikey + ' &api_secret=' + s
     // can display id's for 50 races, 10 for testing purposes
     for (let i = 0; i < 10; i++) {
       raceObject = user.races[i];
-      console.log("\nRace ID: " + raceObject.race.race_id);
+      console.log(i + "  \nRace ID: " + raceObject.race.race_id, raceObject.race.name);
 
       var events = "";
 
       // some races have multiple events, group race id and their event id's together
       // concatenating into string for console printing purposes, event id is an integer
-      for(let j = 0; raceObject.race.events[i] != null; i++) {
-          array2[i] = [raceObject.race.race_id, raceObject.race.events[i].event_id , raceObject.race.events[i].name];
+      for(let j = 0; raceObject.race.events[j] != null; j++) {
+          console.log([raceObject.race.race_id, raceObject.race.events[j].event_id , raceObject.race.events[j].name]);
       }
       
       console.log(array2);
