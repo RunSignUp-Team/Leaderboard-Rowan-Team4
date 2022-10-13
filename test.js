@@ -15,6 +15,7 @@ fetch('https://runsignup.com/Rest/races?api_key=' + apikey + ' &api_secret=' + s
     // can display id's for 50 races, 10 for testing purposes
     for (let i = 0; i < 10; i++) {
       raceObject = user.races[i];
+      array1[i] = [raceObject.race.race_id, raceObject.race.name]
      // console.log(i + "  \nRace ID: " + raceObject.race.race_id, raceObject.race.name);
 
       var events = "";
@@ -47,6 +48,20 @@ fetch('https://runsignup.com/Rest/races?api_key=' + apikey + ' &api_secret=' + s
   for (var i = 0; i < array2.length; i++) 
   {
       statement.run(array2[i], function (err) { 
+          if (err) throw err;
+      });
+  }
+
+  let insertionQuery2 =    
+    "INSERT INTO Races (race_id, race_name) " +
+    "VALUES (?, ?)"; 
+
+
+  let statement2 = db.prepare(insertionQuery2);
+
+  for (var i = 0; i < array1.length; i++) 
+  {
+      statement2.run(array1[i], function (err) { 
           if (err) throw err;
       });
   }
