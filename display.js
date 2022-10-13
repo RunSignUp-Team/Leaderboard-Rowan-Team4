@@ -10,7 +10,7 @@ let db = new sqlite3.Database('db.db', sqlite3.OPEN_READ, (err) => {
 
 // create the statement for the insertion of just ONE record
 let query = 
-  `select place, first_name, last_name, result_time from Test`; // Cannot use ? for some reason to input which fields we want returned
+  `select place, first_name, last_name, result_time from Racers_Result`; // Cannot use ? for some reason to input which fields we want returned
 
 db.each(query, (err, row) => {
     if (err) {

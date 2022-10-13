@@ -32,7 +32,7 @@ fetch('https://runsignup.com/Rest/race/21/results/get-results?api_key=' + apikey
   
   // create the statement for the insertion of just ONE record
   let insertionQuery = 
-    "INSERT INTO Test (place, first_name, last_name, result_time ) " +
+    "INSERT INTO Racers_Result (place, first_name, last_name, result_time ) " +
     "VALUES (?, ?, ?, ?)"; 
   
   let statement = db.prepare(insertionQuery);
