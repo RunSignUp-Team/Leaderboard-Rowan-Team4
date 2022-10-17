@@ -93,6 +93,8 @@ async function processRacesAndEvents() {
 
     populate(insertionQuery2, raceData, db);
 
+    db.close;
+
 });
 return;
 }
@@ -123,10 +125,31 @@ async function processResults() {
   
     let statement = db.prepare(insertionQuery);
   
-  
     populate(insertionQuery, resultData, db);
+
+    db.close;
 
 });
 }
 
-processResults();
+function resetDB() {
+
+  const sqlite3 = require('sqlite3').verbose();
+
+  let db = new sqlite3.Database('db.db', sqlite3.OPEN_READWRITE, (err) => {
+      if (err){
+          return console.error(err.message);
+      }
+  }); 
+
+  db.run('DELETE from Races');
+  db.run('DELETE from Event');
+  db.run('DELETE from Racers_Result');
+
+  db.close;
+
+}
+
+resetDB();
+
+//processResults();
