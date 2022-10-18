@@ -1,33 +1,86 @@
 /*h1,
 li,*/
 p {
-    color: black;
-    width: 500px; /*creates a width around the paragraph texts*/
-    border: 1px solid black; /*makes the width border black with size 1px*/
+  color: black;
+  width: 500px; /*creates a width around the paragraph texts*/
+  border: 1px solid black; /*makes the width border black with size 1px*/
+  font-size: 20px;
+  text-align: center;
+  margin: auto;
+}
 
+/*Changes the header/title of the page*/
+h1 { 
+  color: rgb(225, 0, 255);
+  width: 350px; /*creates a width around the paragraph texts*/
+  border: 1px solid black; /*makes the width border black with size 1px*/
+  background-color: aliceblue;
+  text-align: center;
+  margin: 0 auto;
+}
+
+/*Changes the page color*/
+body
+  {
+    background-color: bisque; 
   }
 
-  /*Changes the header/title of the page*/
-  h1 { 
-    color: rgb(225, 0, 255);
-    width: 350px; /*creates a width around the paragraph texts*/
-    border: 1px solid black; /*makes the width border black with size 1px*/
-    background-color: aliceblue;
-
+  /*Format the image/logo to the center of the page*/
+  .logo
+  {
+    display: block;
     margin: 0 auto;
   }
 
-/*Changes the page color*/
-  body
-    {
-      background-color: bisque; 
-    }
+  label /*The words before the drop down menus*/
+  {
+    /*display: block;
+    text-align: center;*/
+    font-size: 20px;
+  }
 
-    /*Format the image/logo to the center of the page*/
-    .logo
-    {
-      display: block;
-      margin: 0 auto;
-    }
+  select /*The word(s) shown in the view of the drop down menu*/
+  {
+    /*display: block;*/
+    font-size: 16px; 
+    /*margin: 0 auto;*/     /*Doesn't work without display block but formats weirdly*/
+  }
 
+  option /*The words in the drop down menu*/
+  {
+    font-size: 15px;
+  }
+
+  /*input /*changes the font size of the submit button
+  {
+    font-size: 18px;
+  }*/
+
+
+
+
+  /*-----------------------PAGE 2 FORMATTING DOWN BELOW------------------------*/
   
+  /*changes the navigation bar*/
+  nav
+  {
+    font-size: 20px;
+  }
+
+  /*changes the title/header of page 2*/
+  h2
+  {
+    color: rgb(0, 60, 255);
+    width: 350px; /*creates a width around the paragraph texts*/
+    border: 1px solid black; /*makes the width border black with size 1px*/
+    background-color: aliceblue;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  /*Change the paragraph text color*/
+  p67
+  {
+    color: rgb(0, 73, 18);
+    font-family: "Lucida Console", monospace;
+  }
