@@ -150,6 +150,6 @@ function resetDB() {
 
 }
 
-resetDB();
+//resetDB();
 
-//processResults();
+processResults();

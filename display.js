@@ -1,23 +1,39 @@
-var array1 = ['first_name', 'last_name'];
+const map = new Map();
+
+var sqlite3=require('sqlite3').verbose();
 
 
-const sqlite3 = require('sqlite3').verbose();
-let db = new sqlite3.Database('db.db', sqlite3.OPEN_READ, (err) => {
-    if (err){
+function DataExt(db, callback) {
+    db.all('SELECT event_id, race_id FROM Event',(err,rows)=>{
+        if(err){
+            return console.error(err.message);
+        }
+        else
+        {           
+            rows.forEach((row)=>{
+                map.set(row.event_id, row.race_id);
+             });
+            
+            return callback(false, map);
+              
+        }
+
+    });
+}
+
+var db=new sqlite3.Database('db.db',(err)=>{
+    if(err){
         return console.error(err.message);
     }
+    console.log('Connected...');
 });
 
-// create the statement for the insertion of just ONE record
-let query = 
-  `select place, first_name, last_name, result_time from Racers_Result`; // Cannot use ? for some reason to input which fields we want returned
+DataExt(db, function(err, content) {
+    if(err) throw(err);
+    ExtractedHostnames = map;
+    //console.log("Events: ", ExtractedHostnames);
 
-
-db.each(query, (err, row) => {
-    if (err) {
-        throw err;
+    for (const [key, value] of map.entries()) {
+        console.log(key + ": " + value)
     }
-
-    console.log(`${row.place} ${row.first_name} ${row.last_name} ${row.result_time}` );
-});
-
+})
