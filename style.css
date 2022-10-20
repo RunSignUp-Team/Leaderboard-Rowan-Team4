@@ -3,7 +3,7 @@ li,*/
 p {
   color: black;
   width: 500px; /*creates a width around the paragraph texts*/
-  border: 1px solid black; /*makes the width border black with size 1px*/
+  border: 1px solid rgb(255, 255, 255); /*makes the width border black with size 1px*/
   font-size: 20px;
   text-align: center;
   margin: auto;
@@ -11,10 +11,10 @@ p {
 
 /*Changes the header/title of the page*/
 h1 { 
-  color: rgb(225, 0, 255);
+  color:rgb(235, 33, 130);
   width: 350px; /*creates a width around the paragraph texts*/
-  border: 1px solid black; /*makes the width border black with size 1px*/
-  background-color: aliceblue;
+  border: 1px solid rgb(255, 255, 255); /*makes the width border black with size 1px*/
+  background-color: rgb(255, 255, 255);
   text-align: center;
   margin: 0 auto;
 }
@@ -22,8 +22,9 @@ h1 {
 /*Changes the page color*/
 body
   {
-    background-color: bisque; 
+    background-color: rgb(255, 255, 255); 
   }
+  
 
   /*Format the image/logo to the center of the page*/
   .logo
@@ -62,6 +63,32 @@ body
   /*-----------------------PAGE 2 FORMATTING DOWN BELOW------------------------*/
   
   /*changes the navigation bar*/
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+}
+
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+#myBtn:hover {
+  background-color: #555;
+}
+
   nav
   {
     font-size: 20px;
@@ -72,7 +99,7 @@ body
   {
     color: rgb(0, 60, 255);
     width: 350px; /*creates a width around the paragraph texts*/
-    border: 1px solid black; /*makes the width border black with size 1px*/
+    border: 1px solid rgb(255, 255, 255); /*makes the width border black with size 1px*/
     background-color: aliceblue;
     text-align: center;
     margin: 0 auto;
@@ -83,4 +110,13 @@ body
   {
     color: rgb(0, 73, 18);
     font-family: "Lucida Console", monospace;
+  }
+
+  .submit {
+    background-color: rgb(235, 33, 130);
+    color:white;
+    border-radius: 20px;
+    font-size: 15px;
+    width:100px;
+    height:40px;
   }
