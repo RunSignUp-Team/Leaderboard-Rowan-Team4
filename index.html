@@ -6,18 +6,25 @@
     <title>RSU Test Page</title>     <!--sets title of page(name in the tab)-->
 
     <!--stuff from css (style.css)-->
-    <link href="styles/style.css" rel="stylesheet" />   <!--turns paragraph text red, change color in style.css file-->
+    <link href="style.css" rel="stylesheet" />   <!--turns paragraph text red, change color in style.css file-->
   
   </head>
   <body>                            <!--contains all content you want to SHOW viewers when they visit your page-->
+    <center>
     
+    <div class="container"></div>
+
     <h1>RunSignUp Main Page</h1>           <!--adds title to page-->
     <br> <!--Line spacing-->
-    <img src="images/runsignup_logo.png" alt="Run Sign Up logo" class="logo" /> <!--HTML code that inserts an image into the page--> <!--"src" is the source and path to image; "alt" is a description of the image; "class" creates a class that can be called in the css to format it-->
+    <ul>
+      <li><a href="https://runsignup.com/" target="_blank"s><img src="runsignup_logo.png"></img></a></li>
+      </ul>
+    </center>
+    </ul>  <!--HTML code that inserts an image into the page--> <!--"src" is the source and path to image; "alt" is a description of the image; "class" creates a class that can be called in the css to format it-->
     <br> 
     <p>Welcome to the main page of the RSU front end page!</p>   <!--adds a paragraph/place to write on the page-->
     <br> 
-    <p>Here is the <a href="https://runsignup.com/">Run Sign Up Website</a> link to access the main page.</p>  <!--link to the run signup website-->
+    
     <br> 
  
 
@@ -39,7 +46,7 @@
 
 <!--<form action="https://www.youtube.com/"> /action_page.php--> 
   <form method="POST" action="page2.html">
-
+<center>
 <label for="race-names">Choose a Race name:</label>
     <select name="race-names" id="race-names">
       <option value="race1">Race 1</option>
@@ -65,7 +72,10 @@
       <option value="event8">9k</option> 
       
     </select> 
+    <br>
+    <br>
     <input type="submit" value="Submit">
+    </center>
   </form>
 
 
