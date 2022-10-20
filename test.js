@@ -56,11 +56,11 @@ function getRacesAndEvents(user) {
 
 }
 
-function getRaceResults(user) {
+function getRaceResults(user, eventID) {
 
   for (let i = 0; i < user.individual_results_sets[0].num_finishers; i++){
     playerObject = (user.individual_results_sets[0].results[i]);
-    resultData[i] = [playerObject.place, 17234, playerObject.first_name, playerObject.last_name, playerObject.chip_time];
+    resultData[i] = [playerObject.place, eventID, playerObject.first_name, playerObject.last_name, playerObject.chip_time];
   }
   
 }
@@ -111,7 +111,7 @@ async function processResults(eventID, raceID) {
    })
   .then(user => {
 
-    getRaceResults(user);
+    getRaceResults(user, eventID);
 
     const sqlite3 = require('sqlite3').verbose();
 
