@@ -7,6 +7,8 @@ var raceData = [];
 var eventData = [];
 var resultData = [];
 
+resetDB();
+
 function initDB() {
 
   const sqlite3 = require('sqlite3').verbose();
@@ -93,27 +95,24 @@ async function processRacesAndEvents() {
 
     populate(insertionQuery2, raceData, db);
 
+
     db.close;
 
 });
 return;
 }
 
-async function processResults() {
+async function processResults(eventID, raceID) {
   await processRacesAndEvents();
 
-  fetch('https://runsignup.com/Rest/race/21/results/get-results?api_key=' + apikey +'&api_secret=' + secret + '&format=json&event_id=537625&include_total_finishers=T&include_split_time_ms=F&supports_nb=F&page=1&results_per_page=1000')
+  fetch('https://runsignup.com/Rest/race/' + raceID + '/results/get-results?api_key=' + apikey +'&api_secret=' + secret + '&format=json&event_id=' + eventID + '&include_total_finishers=T&include_split_time_ms=F&supports_nb=F&page=1&results_per_page=1000')
   .then(response => {
     return response.json();
    })
   .then(user => {
-  
-    console.log("Place\t" + "Name\t" + "\t\tTime\t")
-    
 
     getRaceResults(user);
-    
-    console.log(resultData[1]);
+
     const sqlite3 = require('sqlite3').verbose();
 
     let db = initDB();
@@ -126,6 +125,10 @@ async function processResults() {
     let statement = db.prepare(insertionQuery);
   
     populate(insertionQuery, resultData, db);
+
+    var query = `UPDATE Racers_Result SET event_id = '537625'`
+
+    db.all('UPDATE Racers_Result SET event_id = 537625 WHERE event_id IS NULL');
 
     db.close;
 
@@ -150,6 +153,49 @@ function resetDB() {
 
 }
 
-//resetDB();
 
-processResults();
+const map = new Map();
+
+var sqlite3=require('sqlite3').verbose();
+
+function DataExt(db, callback) {
+  db.all('SELECT event_id, race_id FROM Event',(err,rows)=>{
+      if(err){
+          return console.error(err.message);
+      }
+      else
+      {           
+          rows.forEach((row)=>{
+              map.set(row.event_id, row.race_id);
+           });
+          
+          return callback(false, map);
+            
+      }
+
+  });
+}
+
+var db=new sqlite3.Database('db.db',(err)=>{
+  if(err){
+      return console.error(err.message);
+  }
+  console.log('Connected...');
+});
+
+
+DataExt(db, function(err, content) {
+  if(err) throw(err);
+  ExtractedHostnames = map;
+  //console.log("Events: ", ExtractedHostnames);
+
+  for (const [key, value] of map.entries()) {
+      console.log(key + ": " + value)
+  }
+})
+
+processResults(537625, 21);
+
+
+
+
