@@ -6,79 +6,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RSU Page 2</title>
     <link href="style.css" rel="stylesheet" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
   </head>
   <body>
-   <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
-    <nav>                                  <!--Creates a navigation bar at the top of the page-->
+    <nav>                                   <!--Creates a navigation bar at the top of the page-->
       <a href="./index.html">Home</a>
+      <a href="./page2.html">Options</a>
+      
     </nav>
+
+    <br>
     <h2>Choose Options To Display</h2>
-    
-    <center>
-      <br>
-      <br>
-      <h1 style="color: green">
-         Welcome To Tutorials Point
-      </h1>
-      <br>
-      <br>
-     
-   
-   
-      <button type="button" value="increase" class="increaseFont">
-         Font ++
-      </button>
-      <button type="button" value="decrease" class="decreaseFont">
-         Font --
-      </button>
-   
-      <div style="padding: 20px; margin: 50px;
-         font-size: 20px; border: 5px solid red;"
-         id="container" class="data"> Welcome to Page 2 of the RSU User Interface!
+    <br>
+    <br>
+  <center>
+    <p2> 
+        Welcome to Page 2 of the RSU User Interface!
         <br>
         Here you will find check boxes for users to select what types of data they want to see in the display!
         <br>
         These items will always be displayed regardless of selection: Name(first and last), time, and gender.
-    </p67>
-  </div>
-</center>
-<script type="text/javascript">
-   $(document).ready(function(){
-      $(".increaseFont,.decreaseFont").click(function(){
-         var type= $(this).val();
-         var curFontSize = $('.data').css('font-size');
-         if(type=='increase'){
-            $('.data').css('font-size', parseInt(curFontSize)+1);
-         } else{
-            $('.data').css('font-size', parseInt(curFontSize)-1);
-         }
-         // alert($('.data').css('font-size'));
-      });
-   });
-</script>
-<script>
-   // Get the button
-   let mybutton = document.getElementById("myBtn");
-   
-   // When the user scrolls down 20px from the top of the document, show the button
-   window.onscroll = function() {scrollFunction()};
-   
-   function scrollFunction() {
-     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-       mybutton.style.display = "block";
-     } else {
-       mybutton.style.display = "none";
-     }
-   }
-   
-   // When the user clicks on the button, scroll to the top of the document
-   function topFunction() {
-     document.body.scrollTop = 0;
-     document.documentElement.scrollTop = 0;
-   }
-   </script>
+    </p2>
+  </center>
+
+  <br>
+  <br>
+  <form method="LAST" action="page3.html">
+    <!--Check boxes-->
+    <label class="container">City
+      <input type="checkbox"> <!--checked="checked"> -->
+      <span class="checkmark"></span>
+    </label>
+    
+    <label class="container">State
+      <input type="checkbox">
+      <span class="checkmark"></span>
+    </label>
+    
+    <label class="container">County
+      <input type="checkbox">
+      <span class="checkmark"></span>
+    </label>
+    
+    <label class="container">Age
+      <input type="checkbox">
+      <span class="checkmark"></span>
+    </label>
+    <br>
+    <br>
+    <input class="submit" type="submit" value="Submit">
+
+    </form>
   </body>
 </html>
