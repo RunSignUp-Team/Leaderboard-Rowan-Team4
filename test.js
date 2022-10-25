@@ -5,8 +5,7 @@ const secret = "yZfkZdIlrpwhmd9IHwMcX3MBMyjkdVGe"
 const apikey = "llq6HUNrfmBZa3VkQdAKNHS0eUZ1EFij"
 var raceData = [];
 var eventData = [];
-var resultData = [];
-
+?
 resetDB();
 
 function initDB() {
