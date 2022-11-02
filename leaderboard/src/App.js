@@ -1,7 +1,9 @@
 import logo from './runsignup_logo.png';
 import './App.css';
 import { RacesDropdown } from './Components/races-dropdown.js'
-
+import { EventsDropdown } from './Components/events-dropdown.js'
+import SubmitButton from './Components/page1Submit.js'
+/*import { Testing } from './test.js'*/
 
 function App() {
   return (
@@ -28,32 +30,25 @@ function App() {
   <center>
     <label htmlFor="race-names">Choose a Race name: </label>
     <RacesDropdown/>
-    <label htmlFor="event-names">Choose an Event name: </label>
-    <select name="event-names" id="event-names">
-      <option value="event1">1k</option>
-      <option value="event2">2k</option>
-      <option value="event3">3k</option>
-      <option value="event4">4k</option>
-      <option value="event5">5k</option>
-      <option value="event6">6k</option>
-      <option value="event7">7k</option>
-      <option value="event8">8k</option>
-      <option value="event8">9k</option>
-    </select>
+    <label htmlFor="event-names">&emsp; Choose an Event name: </label>
+    <EventsDropdown/>
     <br />
     <br />
-    <input className="submit" type="submit" defaultValue="Submit" />
+    
   </center>
+  <SubmitButton/>
 </form>
 
       </div>
 
+      
       </header>
     </div>
 
 
 
   );
+  
   
 }
 
