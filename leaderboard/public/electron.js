@@ -1,5 +1,7 @@
 const electron = require('electron');
 
+require('../src/message-control/main');
+
 const { app } = electron;
 const { BrowserWindow } = electron;
 
@@ -9,7 +11,14 @@ const isDev = require('electron-is-dev');
 let mainWindow;
 
 function createWindow() {
-    mainWindow = new BrowserWindow({ width: 900, height: 680 });
+    mainWindow = new BrowserWindow({
+        width: 900,
+        height: 680,
+        webPreferences: {
+            nodeIntegration: true,
+            enableRemoteModule: true,
+            contextIsolation: false,        },
+    });
     mainWindow.loadURL(
         isDev
             ? 'http://localhost:3000'
@@ -32,4 +41,5 @@ app.on('activate', () => {
     if (mainWindow === null) {
         createWindow();
     }
+    
 });
