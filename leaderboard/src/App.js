@@ -1,28 +1,12 @@
-import React, { useState } from 'react';
-import sendAsync from './message-control/renderer';
 import { Populate } from './Components/populateButton.js';
 import logo from './runsignup_logo.png';
 import './App.css';
-import { RacesDropdown } from './Components/races-dropdown.js'
-import { EventsDropdown } from './Components/events-dropdown.js'
-import { Reset, resetButton } from './Components/resetButton.js'
+import  Dropdown  from './Components/races-dropdown.js'
+import { Reset } from './Components/resetButton.js'
 import SubmitButton from './Components/page1Submit.js'
-import { Fill } from './Components/fillMapButton.js';
 /*import { Testing } from './test.js'*/
 
-const { ipcRenderer } = window.require('electron');
-
 function App() {
-  
-  // below is used to send sql queries and store result in response
-  /*
-  const [message, setMessage] = useState('SELECT * FROM repositories');
-  const [response, setResponse] = useState();
-
-  function send(sql) {
-      sendAsync(sql).then((result) => setResponse(result));
-  }
-  */
 
   return (
     <div className="App">
@@ -46,10 +30,7 @@ function App() {
       <div id="submit form">
       <form method="POST" action="page2.html">
   <center>
-    <label htmlFor="race-names">Choose a Race name: </label>
-    <RacesDropdown/>
-    <label htmlFor="event-names">&emsp; Choose an Event name: </label>
-    <EventsDropdown/>
+    <Dropdown/>
     <br />
     <br />
     
@@ -59,8 +40,6 @@ function App() {
   <Populate/>
   <br/>
   <Reset/>
-  <br/>
-  <Fill/>
   
 </form>
 
