@@ -7,6 +7,7 @@ export default class SubmitButton extends Component {
           <button type="submit">
             Submit
           </button>
+          
     );
   }
 }
