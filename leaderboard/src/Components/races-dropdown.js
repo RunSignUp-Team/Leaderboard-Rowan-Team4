@@ -29,7 +29,7 @@ function Dropdown() {
     function handleChange(e) {
         //this.setState({selectValue:e.target.value});
         let raceid = e.target.value;
-        const message2 = 'SELECT event_id FROM Event WHERE race_id = ' + raceid;
+        const message2 = 'SELECT event_name FROM Event WHERE race_id = ' + raceid;
         send2(message2);        
     }
 
@@ -52,7 +52,7 @@ function Dropdown() {
             <select name="event-names" id="event-names">
             {
                 response2.map(event => 
-                    <option value = {event.event_id}>{event.event_id}</option>
+                    <option value = {event.event_name}>{event.event_name}</option>
 
                 )
 
