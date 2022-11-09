@@ -18,7 +18,6 @@ function Home() {
               <br />
               <br />
         <SubmitButton />
-
         <br />
             <Populate />
             <br />
@@ -26,7 +25,8 @@ function Home() {
 
         </center>
 
-        
+        <br />
+        <br />
         </>
         
     );
