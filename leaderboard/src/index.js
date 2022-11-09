@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 
 
+<<<<<<< HEAD
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
@@ -15,30 +16,20 @@ import NoPage from "./pages/NoPage";
 
 
 
+=======
+>>>>>>> 35293b9bcece353498a7b48f6d9fb5f324c7f8b4
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <><React.StrictMode>
+  <React.StrictMode>
     <App />
-  </React.StrictMode><BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="blogs" element={<Blogs />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="*" element={<NoPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter></>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-
-ReactDOM.render(<App />, document.getElementById("root"));
-
 
 
 
@@ -63,3 +54,4 @@ function goToFirstWindow() {
   //Code to close the window after doing other actions
   remote.getCurrentWindow().close();
 }
+

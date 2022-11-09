@@ -1,8 +1,14 @@
 import React from 'react';
+import '../blog.css';
 
 function Blogs() {
     return (
-        <h1>this is the blogs page</h1>
+        <div className = "blog">
+            <header className = "blog-header">
+                <h1>this is the blogs page</h1>
+            </header>
+
+        </div>
     );
 }
 
