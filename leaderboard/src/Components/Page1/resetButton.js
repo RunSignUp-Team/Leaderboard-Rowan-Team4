@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { channels } from '../shared/constants.js';
+import { channels } from '../../shared/constants.js';
 
 const { ipcRenderer } = window.require('electron');
 
