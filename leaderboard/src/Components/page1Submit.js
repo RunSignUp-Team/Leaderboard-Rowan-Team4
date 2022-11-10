@@ -10,7 +10,7 @@ export default class SubmitButton extends Component {
     return  (
 
       <div>
-      <Link to="/blogs">
+      <Link to="/page2">
           <button type="submit" > Submit </button>
       </Link>
       </div>

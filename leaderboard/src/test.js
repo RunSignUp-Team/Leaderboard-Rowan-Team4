@@ -188,6 +188,42 @@ DataExt(db, function(err, content) {
   for (const [key, value] of map.entries()) {
       console.log(key + ": " + value)
   }
+  const createTray = () => {
+    const icon = path.join(__dirname, 'icon.png')
+   
+    const nImage = nativeImage.createFromPath(icon)
+
+    tray = new Tray(nImage)
+   
+    tray.on('click', (event) => toggleWindow())
+}
+
+
+// Toggles window visibility
+const toggleWindow = () => {
+    window.isVisible() ? window.hide() : showWindow()
+
+}
+
+const showWindow = () => {
+const position = windowPosition()
+window.setPosition(position.x, position.y)
+window.show()
+}
+// Calculates window position as well as tray position
+const windowPosition = () => {
+    const windowBounds = window.getBounds()
+    const trayBounds = tray.getBounds()
+
+    const x = Math.round(trayBounds.x + (trayBounds.width/2) - (windowBounds.width/2))
+    const y = Math.round(trayBounds.y + trayBounds.height)
+    return {x, y}
+}
+
+  app.on('window-all-closed', function () {
+    if (process.platform !== 'darwin') app.quit()
+  })
+
 })
 
 processResults(537625, 21);
