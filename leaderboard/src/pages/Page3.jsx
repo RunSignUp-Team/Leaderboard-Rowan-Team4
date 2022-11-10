@@ -1,18 +1,16 @@
 import React from 'react';
 import logo from '../runsignup_logo.png';
-import SubmitButton from '../Components/page1Submit.js'
 
 console.log(logo);
 
-function Contact() {
+function Page3() {
     return (
         <>
         <center>
-        <h1>this is the contact page</h1>
+        <h1>this is page 3</h1>
         <h2>asdasdasdsadasdd</h2>
         <img src={logo} alt="Logo" />
 
-        <SubmitButton />
         </center>
         </>
         
@@ -21,4 +19,4 @@ function Contact() {
     
 }
 
-export default Contact;
+export default Page3;

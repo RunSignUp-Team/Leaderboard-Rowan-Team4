@@ -1,10 +1,10 @@
 import React from 'react';
 import logo from '../runsignup_logo.png';
 import '../App.css';
-import  Dropdown  from '../Components/races-dropdown.js'
-import { Reset } from '../Components/resetButton.js'
-import SubmitButton from '../Components/page1Submit.js'
-import { Populate } from '../Components/populateButton.js';
+import  Dropdown  from '../Components/Page1/races-dropdown.js'
+import { Reset } from '../Components/Page1/resetButton.js'
+import SubmitButton from '../Components/Page1/page1Submit.js'
+import { Populate } from '../Components/Page1/populateButton.js';
 
 function Home() {
     return (

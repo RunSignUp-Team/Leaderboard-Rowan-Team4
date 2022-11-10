@@ -1,9 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class Submit extends React.Component {
   render() {
-    return <input className="submit" type="submit" defaultValue="Submit" />;
-  }
+    return  (
+
+      <div>
+      <Link to="/page3">
+          <button type="submit" > Submit </button>
+      </Link>
+      </div>
+          
+    );  }
 
 }
 
