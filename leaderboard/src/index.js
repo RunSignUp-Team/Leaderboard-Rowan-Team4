@@ -6,7 +6,6 @@ import reportWebVitals from './reportWebVitals';
 
 
 
-<<<<<<< HEAD
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
@@ -16,8 +15,6 @@ import NoPage from "./pages/NoPage";
 
 
 
-=======
->>>>>>> 35293b9bcece353498a7b48f6d9fb5f324c7f8b4
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
