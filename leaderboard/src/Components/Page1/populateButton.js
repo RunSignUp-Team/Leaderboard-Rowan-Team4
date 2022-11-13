@@ -19,6 +19,7 @@ export class Populate extends Component {
         <button type="button" onClick={getData}>
         Populate
     </button>
+    
     )
   }
 

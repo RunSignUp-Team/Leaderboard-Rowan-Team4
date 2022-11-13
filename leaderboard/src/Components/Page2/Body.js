@@ -8,7 +8,7 @@ class Body extends React.Component {
     <br />
     Here you will find check boxes for users to select what types of data they want to see in the display!
     <br />
-    These items will always be displayed regardless of selection: Name(first and last), time, and gender.
+    These items will always be displayed regardless of selection: <em><u>Name(first and last), Time, and Gender</u></em>.
   </div>
     </center>;
   }

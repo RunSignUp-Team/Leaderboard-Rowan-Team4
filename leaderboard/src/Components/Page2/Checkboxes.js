@@ -11,8 +11,11 @@ class Checkboxes extends React.Component {
     return <form method="LAST" action="page3.html">
   {}
   <City></City>
+  <br></br>
   <State></State>
+  <br></br>
   <County></County>
+  <br></br>
   <Age></Age>
   <br />
   <br />

@@ -18,8 +18,7 @@ function Home() {
             <form method="POST" action="index.html">
               <center>
                 <Dropdown />
-                <br />
-                <br />
+                <br /> 
   
               </center>
               <SubmitButton />
