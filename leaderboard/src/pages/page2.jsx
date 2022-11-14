@@ -10,7 +10,7 @@ function Page2 () {
     return (
       <>
       <a href="/"> <img src={image} className="BackArrow" alt="Pink Arrow" /> </a>
-      <div className="App">
+      <div className="page2format">
         <br>
         </br>
         <Header />
@@ -19,6 +19,10 @@ function Page2 () {
         <Body />
         <br></br>
         <Checkboxes />
+        <br/>
+        <br/>
+        <br/>
+        
       </div>
       </>
     );
