@@ -1,52 +1,44 @@
 import '../../App.css';
+import React, { useState, useEffect } from 'react';
+import sendAsync from '../../message-control/renderer';
 
-function App() {
+
+function Table() {
+
+    
+
+    const [response, setResponse] = useState([]);
+    
+    function send(sql) {
+        sendAsync(sql).then((result) => setResponse(result));
+    }
+
+    useEffect(function () {
+        const message = 'SELECT event_id, event_name, race_id FROM Event;'
+        send(message);
+
+    }, []);
+
 return (
-	<div className="table">
+	<div className="Table">
       <table>
         <tr>
-          <th><u>Position</u></th>
-          <th><u>Name</u></th>
-          <th><u>Time</u></th>
-          <th><u>Age</u></th>
-          <th><u>Gender</u></th>
+          <th>event_id</th>
+          <th>event_name</th>
+          <th>race_id</th>
         </tr>
-
-        <tr>
-          <td>1</td>
-          <td>Tom Evans</td>
-          <td>20:33</td>
-          <td>19</td>
-          <td>Male</td>
-        </tr>
-
-        <tr>
-          <td>2</td>
-          <td>Megan Green</td>
-          <td>20:46</td>
-          <td>19</td>
-          <td>Female</td>
-        </tr>
-
-        <tr>
-          <td>3</td>
-          <td>Josh Davoni</td>
-          <td>30:32</td>
-          <td>25</td>
-          <td>Male</td>
-        </tr>
-
-        <tr>
-          <td>4</td>
-          <td>Danny Man</td>
-          <td>40:16</td>
-          <td>33</td>
-          <td>Male</td>
-        </tr>
-        
+        {response.map((val, key) => {
+          return (
+            <tr key={key}>
+              <td>{val.event_id}</td>
+              <td>{val.event_name}</td>
+              <td>{val.race_id}</td>
+            </tr>
+          )
+        })}
       </table>
     </div>
-);
+  );
 }
 
-export default App;
+export default Table;
