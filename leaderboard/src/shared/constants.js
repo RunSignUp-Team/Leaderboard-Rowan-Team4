@@ -5,6 +5,7 @@ module.exports = {
       FILL_MAP: 'fill_map',
       ASYNC_REPLY: 'asynchronous-reply',
       ASYNC_MESSAGE: 'asynchronous-message',
-      SEND_MAP: "send_map"
+      SEND_MAP: "send_map",
+      GET_RESULTS: "get_results"
     },
   };
