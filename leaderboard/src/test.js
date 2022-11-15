@@ -13,7 +13,7 @@ function initDB() {
 
   const sqlite3 = require('sqlite3').verbose();
 
-  let database = new sqlite3.Database('db.db', sqlite3.OPEN_READWRITE, (err) => {
+  let database = new sqlite3.Database('../public/db.db', sqlite3.OPEN_READWRITE, (err) => {
       if (err){
           return console.error(err.message);
       }
@@ -135,7 +135,7 @@ function resetDB() {
 
   const sqlite3 = require('sqlite3').verbose();
 
-  let db = new sqlite3.Database('db.db', sqlite3.OPEN_READWRITE, (err) => {
+  let db = new sqlite3.Database('../public/db.db', sqlite3.OPEN_READWRITE, (err) => {
       if (err){
           return console.error(err.message);
       }
@@ -172,7 +172,7 @@ function DataExt(db, callback) {
   });
 }
 
-var db=new sqlite3.Database('db.db',(err)=>{
+var db=new sqlite3.Database('../public/db.db',(err)=>{
   if(err){
       return console.error(err.message);
   }
@@ -199,30 +199,6 @@ DataExt(db, function(err, content) {
 }
 
 
-// Toggles window visibility
-const toggleWindow = () => {
-    window.isVisible() ? window.hide() : showWindow()
-
-}
-
-const showWindow = () => {
-const position = windowPosition()
-window.setPosition(position.x, position.y)
-window.show()
-}
-// Calculates window position as well as tray position
-const windowPosition = () => {
-    const windowBounds = window.getBounds()
-    const trayBounds = tray.getBounds()
-
-    const x = Math.round(trayBounds.x + (trayBounds.width/2) - (windowBounds.width/2))
-    const y = Math.round(trayBounds.y + trayBounds.height)
-    return {x, y}
-}
-
-  app.on('window-all-closed', function () {
-    if (process.platform !== 'darwin') app.quit()
-  })
 
 })
 
