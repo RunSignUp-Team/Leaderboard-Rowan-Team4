@@ -60,7 +60,7 @@ function getRaceResults(user, eventID) {
 
   for (let i = 0; i < user.individual_results_sets[0].num_finishers; i++){
     playerObject = (user.individual_results_sets[0].results[i]);
-    resultData[i] = [playerObject.place, eventID, playerObject.first_name, playerObject.last_name, playerObject.chip_time];
+    resultData[i] = [playerObject.result_id, playerObject.place, eventID, playerObject.first_name, playerObject.last_name, playerObject.chip_time];
   }
   
 }
@@ -119,8 +119,8 @@ async function processResults(eventID, raceID) {
   
     // create the statement for the insertion of just ONE record
     let insertionQuery = 
-     "INSERT INTO Racers_Result (place, event_id, first_name, last_name, result_time ) " +
-     "VALUES (?, ?, ?, ?, ?)"; 
+     "INSERT or ignore into Racers_Result (result_id, place, event_id, first_name, last_name, result_time ) " +
+     "VALUES (?, ?, ?, ?, ?, ?)"; 
   
     let statement = db.prepare(insertionQuery);
   
