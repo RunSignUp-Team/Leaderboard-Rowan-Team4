@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import '../App.css';
 import Checkboxes from '../Components/Page2/Checkboxes'
 import Body from '../Components/Page2/Body'

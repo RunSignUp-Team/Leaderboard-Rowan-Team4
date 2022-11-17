@@ -21,18 +21,15 @@ function Dropdown() {
     
 
     useEffect(function () {
-        const message = 'SELECT event_name, race_id FROM Races;'
+        const message = 'SELECT race_name FROM Races;'
         send(message);
 
     }, []);
 
     function handleChange(e) {
         //this.setState({selectValue:e.target.value});
-        let raceid = e.map(event => 
-            <option value = {event.race_id}>{event.race_id}</option>
-
-        )
-        const message2 = 'select event_name from event where race_id = ' + '\"' + raceid + '\"';
+        let raceid = e.target.value;
+        const message2 = 'select event_name from Races a, event b where a.race_id = b.race_id and race_name = ' + '\'' + raceid + '\'';
         send2(message2);        
     }
 
