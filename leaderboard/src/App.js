@@ -6,7 +6,7 @@ import { Switch } from "react-router";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
-import Page2 from "./pages/Page2";
+import Page2 from "./pages/page2";
 import Page3 from "./pages/Page3";
 import NoPage from "./pages/NoPage";
 

@@ -89,6 +89,44 @@ function processRacesAndEvents() {
     });
 
 }
+
+function getRaceResults(user, eventID) {
+
+    for (let i = 0; i < user.individual_results_sets[0].num_finishers; i++){
+      playerObject = (user.individual_results_sets[0].results[i]);
+      resultData[i] = [playerObject.place, eventID, playerObject.first_name, playerObject.last_name, playerObject.chip_time];
+    }
+    
+}
+
+function processResults(eventID, raceID) {
+
+    fetch('https://runsignup.com/Rest/race/' + raceID + '/results/get-results?api_key=' + apikey +'&api_secret=' + secret + '&format=json&event_id=' + eventID + '&include_total_finishers=T&include_split_time_ms=F&supports_nb=F&page=1&results_per_page=1000')
+    .then(response => {
+      return response.json();
+     })
+    .then(user => {
+  
+      getRaceResults(user, eventID);
+  
+      const sqlite3 = require('sqlite3').verbose();
+  
+      let db = initDB();
+    
+      // create the statement for the insertion of just ONE record
+      let insertionQuery = 
+       "INSERT INTO Racers_Result (place, event_id, first_name, last_name, result_time ) " +
+       "VALUES (?, ?, ?, ?, ?)"; 
+    
+      let statement = db.prepare(insertionQuery);
+    
+      populate(insertionQuery, resultData, db);
+  
+      db.close;
+  
+  });
+  }
+
 function resetDB() {
 
     const sqlite3 = require('sqlite3').verbose();
@@ -162,6 +200,11 @@ ipcMain.on(channels.FILL_MAP, (event, arg) => {
     console.log("Map filled")
 
     
+});
+
+ipcMain.on(channels.GET_RESULTS, (event, arg) => {
+    processResults(537625, 21);
+    console.log("Results Loaded");
 });
 
 
