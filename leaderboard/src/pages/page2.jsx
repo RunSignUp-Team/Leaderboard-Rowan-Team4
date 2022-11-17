@@ -4,6 +4,8 @@ import Body from '../Components/Page2/Body'
 import Header from '../Components/Page2/Header'
 import image from '../PinkArrow.png';
 
+//f
+
 function Page2 () {
  
     return (
