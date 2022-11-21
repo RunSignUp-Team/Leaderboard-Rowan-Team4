@@ -5,7 +5,7 @@ import sendAsync from '../../message-control/renderer';
 
 function Table() {
 
-    
+
 
     const [response, setResponse] = useState([]);
     

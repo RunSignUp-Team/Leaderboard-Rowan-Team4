@@ -3,6 +3,7 @@ import logo from '../runsignup_logo.png';
 import image from '../PinkArrow.png';
 import '../App.css';
 import Table from '../Components/Page3/Table.js'
+import Update from '../Components/Page3/Update';
 
 console.log(logo);
 
@@ -17,6 +18,7 @@ function Page3() {
         </center>
 
         <Table />
+        <Update />
         
         </div>
 
