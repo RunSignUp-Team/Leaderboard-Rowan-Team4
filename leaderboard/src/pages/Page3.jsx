@@ -14,7 +14,6 @@ function Page3() {
         
         <center>
         <h1>Welcome to Page 3 of the RSU Application</h1>
-        <h2>Here you will find a table with the race results.</h2>
         </center>
 
         <Table />
