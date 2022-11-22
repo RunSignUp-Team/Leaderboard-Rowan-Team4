@@ -9,6 +9,8 @@ const apikey = "llq6HUNrfmBZa3VkQdAKNHS0eUZ1EFij"
 var raceData = [];
 var eventData = [];
 var resultData = [];
+var raceID;
+var eventID;
 
 function initDB() {
 
@@ -127,6 +129,21 @@ function processResults(eventID, raceID) {
   });
   }
 
+function addTestRace() {
+    const sqlite3 = require('sqlite3').verbose();
+  
+    let db = new sqlite3.Database('./public/db.db', sqlite3.OPEN_READWRITE, (err) => {
+        if (err){
+            return console.error(err.message);
+        }
+    }); 
+
+    db.run('INSERT into Races (race_id, race_name) VALUES ("21", "In Person 8K Results")')
+    db.run('INSERT into Event (event_id, event_name, race_id) VALUES ("537625", "8k Event", "21")')
+    db.run('INSERT into Races (race_id, race_name) VALUES ("137710", "Rowan Test Race - Team 4")')
+    db.run('INSERT into Event (event_id, event_name, race_id) VALUES ("655875", "5k", "137710")')
+}
+
 function resetDB() {
 
     const sqlite3 = require('sqlite3').verbose();
@@ -173,10 +190,44 @@ ipcMain.on(channels.ASYNC_MESSAGE, (event, arg) => {
         event.reply(channels.ASYNC_REPLY, (err && err.message) || rows);
     });
 
+
 });
+
+ipcMain.on('storeRaces', (event, arg) => {
+    const response = arg;
+
+    let racename = "'" + response.raceName + "'"    
+    const raceIDquery = 'SELECT race_id FROM Races WHERE race_name = ' + racename
+
+    database.get(raceIDquery, (err, rows) => {
+        if (err) {
+            throw err;
+        }
+        else {
+            console.log(rows.race_id)
+            raceID = rows.race_id  
+            
+            let eventname = "'" + response.eventName + "'"
+            const eventIDquery = 'SELECT event_id FROM Event WHERE event_name = ' + eventname + ' AND race_id = ' + raceID
+        
+            database.get(eventIDquery, (err, rows) => {
+                if (err) {
+                    throw err;
+                }
+                else {
+                    debugger;
+                    console.log(rows.event_id)
+                    eventID = rows.event_id
+                }
+            });
+        }
+
+    });
+})
 
 ipcMain.on(channels.GET_DATA, (event, arg) => {
     processRacesAndEvents();
+    addTestRace();
     console.log("Races & Events Populated");
 });
 
@@ -202,8 +253,10 @@ ipcMain.on(channels.FILL_MAP, (event, arg) => {
     
 });
 
+
+
 ipcMain.on(channels.GET_RESULTS, (event, arg) => {
-    processResults(537625, 21);
+    processResults(eventID, raceID);
 });
 
 

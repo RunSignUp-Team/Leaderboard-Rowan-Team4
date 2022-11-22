@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import sendAsync from '../../message-control/renderer';
+import SubmitButton from './page1Submit';
 
 
 function Dropdown() {
 
-    
-
     const [response, setResponse] = useState([]);
     const [response2, setResponse2] = useState([]);
 
+    const [raceSelection, setRaceSelection] = useState('');
+    const [eventSelection, setEventSelection] = useState('');
 
+    const [condition, setCondition] = useState('true')
+
+    var test;
+    
     function send(sql) {
         sendAsync(sql).then((result) => setResponse(result));
     }
@@ -26,19 +31,30 @@ function Dropdown() {
 
     }, []);
 
-    function handleChange(e) {
+    function handleChangeRace(e) {
         //this.setState({selectValue:e.target.value});
+        setRaceSelection(e.target.value);
         let raceid = e.target.value;
-        const message2 = 'select event_name from Races a, event b where a.race_id = b.race_id and race_name = ' + '\'' + raceid + '\'';
-        send2(message2);        
+        
+        const message2 = 'select event_name from Races a, event b where a.race_id = b.race_id and race_name = ' + '\"' + raceid + '\"';
+        send2(message2);      
     }
+
+    function handleChangeEvent(e) {
+        setCondition(false)
+        setEventSelection(e.target.value)
+        
+    }
+
+
 
 
     return(   
         <div className = "dropdowns">
             <label htmlFor="race-names">Choose a Race name: </label>
 
-            <select name="race-names" id="race-names" onChange={handleChange} >
+            <select name="race-names" id="race-names" onChange={handleChangeRace}>
+                <option disabled selected value> -- select an option -- </option>
             {
                 response.map(race => 
                     <option value = {race.race_name}>{race.race_name}</option>
@@ -49,7 +65,8 @@ function Dropdown() {
         
             </select>
             <label htmlFor="event-names">&emsp; Choose an Event name: </label>
-            <select name="event-names" id="event-names">
+            <select name="event-names" id="event-names" onChange={handleChangeEvent}>
+                <option disabled selected value> -- select an option -- </option>
             {
                 response2.map(event => 
                     <option value = {event.event_name}>{event.event_name}</option>
@@ -59,7 +76,11 @@ function Dropdown() {
             }
             
             </select>
+            <br />
+            <br />
 
+            <SubmitButton race = {raceSelection} event = {eventSelection} buttonCondition = {condition}/>
+            
         </div>
 
 

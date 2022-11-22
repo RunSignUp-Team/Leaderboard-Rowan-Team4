@@ -20,9 +20,7 @@ function Home() {
                 <Dropdown />
                 <br /> 
   
-              </center>
-              <SubmitButton />
-              
+              </center>              
               <Populate />
               <br />
               <Reset />
