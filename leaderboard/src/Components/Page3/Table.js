@@ -1,9 +1,9 @@
 import '../../App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Com } from 'react';
 import sendAsync from '../../message-control/renderer';
-
-
+import {Font} from './Font';
 function Table() {
+
 
 
 
@@ -36,6 +36,7 @@ return (
             </tr>
           )
         })}
+        
       </table>
     </div>
   );
