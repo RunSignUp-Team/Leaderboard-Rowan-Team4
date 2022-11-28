@@ -6,7 +6,7 @@ import Table from '../Components/Page3/Table.js'
 import Update from '../Components/Page3/Update';
 import {Font} from '../Components/Page3/Font';
 import ScrollTop from '../Components/Page3/ScrollTop';
-import ScrollBottom from '../Components/Page3/ScrollBottom';
+import AutoScroll from '../Components/Page3/AutoScroll';
 
 
 console.log(logo);
@@ -23,9 +23,8 @@ function Page3() {
         
         <Font />
         <Table />
-        <Update />
         <ScrollTop />
-        <ScrollBottom />
+        <AutoScroll />
         </div>
         </>
         
