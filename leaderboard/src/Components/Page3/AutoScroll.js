@@ -3,7 +3,7 @@ import react from "react";
 
 
 
-export default function scrollToBottom(timedelay=0) {
+export default function scrollToBottom(timedelay=1000000000) {
     var scrollId;
     var height = 0;
     var minScrollHeight = 1;

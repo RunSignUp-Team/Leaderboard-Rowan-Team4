@@ -23,8 +23,8 @@ function Page3() {
         
         <Font />
         <Table />
+        <Update />
         <ScrollTop />
-        <AutoScroll />
         </div>
         </>
         

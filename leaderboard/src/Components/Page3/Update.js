@@ -4,7 +4,8 @@ const { ipcRenderer } = window.require('electron');
 
 function Update({info}) {
 
-    const THIRTY_SECONDS_MS = 5000;
+    const THIRTY_SECONDS_MS = 3000;
+
 
     useEffect(() => {
       const interval = setInterval(() => {

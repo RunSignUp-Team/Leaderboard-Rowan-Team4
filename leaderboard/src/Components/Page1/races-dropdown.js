@@ -36,7 +36,7 @@ function Dropdown() {
         setRaceSelection(e.target.value);
         let raceid = e.target.value;
         
-        const message2 = 'select event_name from Races a, event b where a.race_id = b.race_id and race_name = ' + '\"' + raceid + '\"';
+        const message2 = 'select event_name from Races a, event b where a.race_id = b.race_id and race_name = ' + '\'' + raceid + '\'';
         send2(message2);      
     }
 
