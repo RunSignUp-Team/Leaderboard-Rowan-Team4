@@ -85,6 +85,9 @@ function processRacesAndEvents() {
       "VALUES (?, ?)"; 
   
       populate(insertionQuery2, raceData, db);
+
+
+      db.run(      `UPDATE Races SET race_name = REPLACE(race_name, '’', '');`     )
   
       db.close;
   
