@@ -14,10 +14,10 @@ export class Font extends React.Component {
    render() {
     return ( 
     <div>
-    <button onclick = {() => this.setState({count: this.state.count + 2}) } >
+    <button onClick = {() => this.setState({count: this.state.count + 2}) } >
         ++
      </button>
-     <button onclick = {() => this.setState({count: this.state.count - 2}) } >
+     <button onClick = {() => this.setState({count: this.state.count - 2}) } >
         --
      </button>
      

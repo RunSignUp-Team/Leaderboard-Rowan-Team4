@@ -85,6 +85,11 @@ function processRacesAndEvents() {
       "VALUES (?, ?)"; 
   
       populate(insertionQuery2, raceData, db);
+
+      db.run('INSERT into Races (race_id, race_name) VALUES ("21", "In Person 8K Results")')
+      db.run('INSERT into Event (event_id, event_name, race_id) VALUES ("537625", "8k Event", "21")')
+      db.run('INSERT into Races (race_id, race_name) VALUES ("137710", "Rowan Test Race - Team 4")')
+      db.run('INSERT into Event (event_id, event_name, race_id) VALUES ("655875", "5k", "137710")')
   
       db.close;
   
@@ -128,21 +133,6 @@ function processResults(eventID, raceID) {
   
   });
   }
-
-function addTestRace() {
-    const sqlite3 = require('sqlite3').verbose();
-  
-    let db = new sqlite3.Database('./public/db.db', sqlite3.OPEN_READWRITE, (err) => {
-        if (err){
-            return console.error(err.message);
-        }
-    }); 
-
-    db.run('INSERT into Races (race_id, race_name) VALUES ("21", "In Person 8K Results")')
-    db.run('INSERT into Event (event_id, event_name, race_id) VALUES ("537625", "8k Event", "21")')
-    db.run('INSERT into Races (race_id, race_name) VALUES ("137710", "Rowan Test Race - Team 4")')
-    db.run('INSERT into Event (event_id, event_name, race_id) VALUES ("655875", "5k", "137710")')
-}
 
 function resetDB() {
 
@@ -204,7 +194,6 @@ ipcMain.on('storeRaces', (event, arg) => {
             throw err;
         }
         else {
-            console.log(rows.race_id)
             raceID = rows.race_id  
             
             let eventname = "'" + response.eventName + "'"
@@ -216,7 +205,6 @@ ipcMain.on('storeRaces', (event, arg) => {
                 }
                 else {
                     debugger;
-                    console.log(rows.event_id)
                     eventID = rows.event_id
                 }
             });
@@ -226,8 +214,8 @@ ipcMain.on('storeRaces', (event, arg) => {
 })
 
 ipcMain.on(channels.GET_DATA, (event, arg) => {
+   // addTestRace();
     processRacesAndEvents();
-    addTestRace();
     console.log("Races & Events Populated");
 });
 
@@ -256,7 +244,27 @@ ipcMain.on(channels.FILL_MAP, (event, arg) => {
 
 
 ipcMain.on(channels.GET_RESULTS, (event, arg) => {
+    console.log("results got")
     processResults(eventID, raceID);
 });
 
+ipcMain.on('resetResults', (event, arg) => {
+    const sqlite3 = require('sqlite3').verbose();
+  
+    let db = new sqlite3.Database('./public/db.db', sqlite3.OPEN_READWRITE, (err) => {
+        if (err){
+            return console.error(err.message);
+        }
+    }); 
 
+    db.run('DELETE from Racers_result')
+
+    resultData = []
+    db.close;
+
+
+});
+
+module.exports = {
+    resetDB
+}

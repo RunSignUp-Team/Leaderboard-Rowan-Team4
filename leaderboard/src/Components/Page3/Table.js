@@ -2,6 +2,7 @@ import '../../App.css';
 import React, { useState, useEffect, Com } from 'react';
 import sendAsync from '../../message-control/renderer';
 import {Font} from './Font';
+import { hasSelectionSupport } from '@testing-library/user-event/dist/utils';
 function Table() {
 
 
@@ -11,9 +12,11 @@ function Table() {
     
     function send(sql) {
         sendAsync(sql).then((result) => setResponse(result));
+        console.log(response)
     }
 
     useEffect(function () {
+
         const message = "SELECT place, (first_name || ' ' || last_name) AS Name, result_time FROM Racers_Result;"
         send(message);
 

@@ -3,7 +3,7 @@ const apiSecret = 'L3QCcl8zAVa3gM8ONfTsdmRcedCpBLQl'
 
 const raceID = 137710
 const eventID5K = 655875
-const individual5kSet = 358824
+const individual5kSet = 358859
 
 const eventID10k = 655876
 const individual10kSet = 2
@@ -25,29 +25,7 @@ function postResults(raceID, eventID) {
 
     
 
-    request.post(
-        'https://runsignup.com/Rest/race/137710/results/full-results?api_key=fl6UtJPAkHn3jylC2s9P7LQ39eYd489e&api_secret=L3QCcl8zAVa3gM8ONfTsdmRcedCpBLQl&format=json',
-        { json: {
-            "results": [{
-                    "bib": 3001,
-                    "place": 1,
-                    "clock_time": "17:00.1",
-                    "chip_time": "17:00.0"
-                },
-                {
-                    "bib": 3002,
-                    "place": 2,
-                    "clock_time": "17:00.2",
-                    "chip_time": "17:00.2"
-                }
-          ]
-        } },
-        function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                console.log(body);
-            }
-        }
-    );
+
 }
 
 

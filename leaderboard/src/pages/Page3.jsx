@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import logo from '../runsignup_logo.png';
 import image from '../PinkArrow.png';
 import '../App.css';
@@ -9,9 +9,9 @@ import ScrollTop from '../Components/Page3/ScrollTop';
 import AutoScroll from '../Components/Page3/AutoScroll';
 
 
-console.log(logo);
 
 function Page3() {
+
     return (
         <>
         <a href="/Page2"> <img src={image} className="BackArrow" alt="Pink Arrow" /> </a>

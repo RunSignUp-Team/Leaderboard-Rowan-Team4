@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-class Submit extends React.Component {
-  render() {
+const { ipcRenderer } = window.require('electron');
+
+export default function Submit(){
+
+
     return  (
 
       <div>
@@ -11,8 +14,7 @@ class Submit extends React.Component {
       </Link>
       </div>
           
-    );  }
+    );  
 
 }
 
-export default Submit;
