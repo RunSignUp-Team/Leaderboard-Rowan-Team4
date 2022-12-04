@@ -148,6 +148,8 @@ function resetDB() {
     db.run('DELETE from Event');
     db.run('DELETE from Racers_Result');
   
+    raceData = []
+    eventData = []
     db.close;
   
   }
