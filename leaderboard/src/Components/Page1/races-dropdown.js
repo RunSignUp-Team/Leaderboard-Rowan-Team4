@@ -35,8 +35,9 @@ function Dropdown() {
         //this.setState({selectValue:e.target.value});
         setRaceSelection(e.target.value);
         let raceid = e.target.value;
-        
-        const message2 = 'select event_name from Races a, event b where a.race_id = b.race_id and race_name = ' + '\'' + raceid + '\'';
+        const chars = {'"':'','’':'',"'":""};
+        raceid = raceid.replace(/["’']/g, m => chars[m]);
+        const message2 = `select b.event_name from Races a, event b where  a.race_id = b.race_id and REPLACE(REPLACE(a.race_name, '"', ''),'’', '') LIKE `+ '\'' + raceid + '\'';
         send2(message2);      
     }
 

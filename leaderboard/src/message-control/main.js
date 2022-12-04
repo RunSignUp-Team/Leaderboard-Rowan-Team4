@@ -86,6 +86,9 @@ function processRacesAndEvents() {
   
       populate(insertionQuery2, raceData, db);
 
+
+      db.run(      `UPDATE Races SET race_name = REPLACE(race_name, '’', '');`     )
+
       db.run('INSERT into Races (race_id, race_name) VALUES ("21", "In Person 8K Results")')
       db.run('INSERT into Event (event_id, event_name, race_id) VALUES ("537625", "8k Event", "21")')
       db.run('INSERT into Races (race_id, race_name) VALUES ("137710", "Rowan Test Race - Team 4")')
