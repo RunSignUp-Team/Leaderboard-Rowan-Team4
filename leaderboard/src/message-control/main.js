@@ -6,11 +6,18 @@ const { channels } = require('../shared/constants');
 
 const secret = "yZfkZdIlrpwhmd9IHwMcX3MBMyjkdVGe"
 const apikey = "llq6HUNrfmBZa3VkQdAKNHS0eUZ1EFij"
+
 var raceData = [];
 var eventData = [];
 var resultData = [];
+
 var raceID;
 var eventID;
+
+var stateChecked = 0;
+var cityChecked = 0;
+var countyChecked = 0;
+var ageChecked = 0;
 
 function initDB() {
 
@@ -104,7 +111,7 @@ function getRaceResults(user, eventID) {
 
     for (let i = 0; i < user.individual_results_sets[0].num_finishers; i++){
       playerObject = (user.individual_results_sets[0].results[i]);
-      resultData[i] = [playerObject.result_id, playerObject.place, eventID, playerObject.first_name, playerObject.last_name, playerObject.chip_time];
+      resultData[i] = [playerObject.result_id, playerObject.place, eventID, playerObject.first_name, playerObject.last_name, playerObject.chip_time, playerObject.age, playerObject.state, playerObject.county, playerObject.city];
     }
     
 }
@@ -125,8 +132,8 @@ function processResults(eventID, raceID) {
     
       // create the statement for the insertion of just ONE record
       let insertionQuery = 
-      "INSERT or ignore into Racers_Result (result_id, place, event_id, first_name, last_name, result_time ) " +
-       "VALUES (?, ?, ?, ?, ?, ?)"; 
+      "INSERT or ignore into Racers_Result (result_id, place, event_id, first_name, last_name, result_time, age, state, county, city ) " +
+       "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
     
       let statement = db.prepare(insertionQuery);
     
@@ -158,26 +165,8 @@ function resetDB() {
   }
 
 const database = initDB();
-const map = new Map();
 
 
-function DataExt(db, callback) {
-    db.all('SELECT event_id, race_id FROM Event',(err,rows)=>{
-        if(err){
-            return console.error(err.message);
-        }
-        else
-        {           
-            rows.forEach((row)=>{
-                map.set(row.event_id, row.race_id);
-             });
-            
-            return callback(false, map);
-              
-        }
-
-    });
-}
 
 ipcMain.on(channels.ASYNC_MESSAGE, (event, arg) => {
     const sql = arg;
@@ -229,25 +218,6 @@ ipcMain.on(channels.RESET_DB, (event, arg) => {
     console.log("Database Reset");
 });
 
-ipcMain.on(channels.FILL_MAP, (event, arg) => {
-    DataExt(database, function(err, content) {
-        if(err) throw(err);
-        ExtractedHostnames = map;
-        //console.log("Events: ", ExtractedHostnames);
-    
-        for (const [key, value] of map.entries()) {
-            console.log(key + ": " + value)
-        }
-
-        
-    })    
-    console.log("Map filled")
-
-    
-});
-
-
-
 ipcMain.on(channels.GET_RESULTS, (event, arg) => {
     console.log("results got")
     processResults(eventID, raceID);
@@ -270,6 +240,79 @@ ipcMain.on('resetResults', (event, arg) => {
 
 });
 
+ipcMain.on('cityChecked', (event, arg) => {
+    if (cityChecked === 0) {
+        cityChecked = 1
+    }
+    else {
+        cityChecked = 0
+    }
+
+    console.log('city status: ' + cityChecked)
+
+});
+
+ipcMain.on('stateChecked', (event, arg) => {
+    if (stateChecked === 0) {
+        stateChecked = 1
+    }
+    else {
+        stateChecked = 0
+    }
+
+    console.log('state status: ' + stateChecked)
+
+
+});
+
+ipcMain.on('ageChecked', (event, arg) => {
+    if (ageChecked === 0) {
+        ageChecked = 1
+    }
+    else {
+        ageChecked = 0
+    }
+
+    console.log('age status: ' + ageChecked)
+
+
+});
+
+ipcMain.on('countyChecked', (event, arg) => {
+    if (countyChecked === 0) {
+        countyChecked = 1
+    }
+    else {
+        countyChecked = 0
+    }
+
+    console.log('county status: ' + countyChecked)
+
+});
+
+ipcMain.on('resetCheckboxes', (event, arg) => {
+    stateChecked = 0;
+    cityChecked = 0;
+    countyChecked = 0;
+    ageChecked = 0;
+});
+
+ipcMain.on('getCheckboxValues', (event, arg) => {
+    const checkboxValues = {
+        ageVal : ageChecked,
+        cityVal : cityChecked,
+        countyVal : countyChecked,
+        stateVal : stateChecked
+    }
+
+    event.sender.send('sendCheckboxValues', checkboxValues)
+
+});
+
 module.exports = {
-    resetDB
+    resetDB,
+    cityChecked,
+    countyChecked,
+    ageChecked,
+    stateChecked
 }

@@ -8,6 +8,12 @@ const { ipcRenderer } = window.require('electron');
 
 function Page2 () {
 
+
+  useEffect(()=>{
+    ipcRenderer.send('resetCheckboxes')
+  }, [])
+
+
     return (
       <>
       <a href="/"> <img src={image} className="BackArrow" alt="Pink Arrow" /> </a>
