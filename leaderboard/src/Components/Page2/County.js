@@ -1,12 +1,18 @@
 import React from "react";
+const { ipcRenderer } = window.require('electron');
 
-class County extends React.Component {
-  render() {
-    return <label className="container">County
-  <input type="checkbox" />
-  <span className="checkmark" />
-    </label>;
+function County() {
+
+  function sendChange() {
+    ipcRenderer.send('countyChecked')
   }
+
+
+    return (<label className="container">County
+  <input type="checkbox" onChange={sendChange}/> {}
+  <span className="checkmark" />
+    </label>)
+  
 
 }
 

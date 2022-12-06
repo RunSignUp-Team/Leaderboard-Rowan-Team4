@@ -2,6 +2,9 @@ const electron = require('electron');
 
 require('../src/message-control/main');
 
+
+const mainFile = require('../src/message-control/main')
+
 const { app } = electron;
 const { BrowserWindow } = electron;
 
@@ -33,9 +36,11 @@ app.on('ready', createWindow);
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
+        mainFile.resetDB();
         app.quit();
     }
 });
+
 
 app.on('activate', () => {
     if (mainWindow === null) {

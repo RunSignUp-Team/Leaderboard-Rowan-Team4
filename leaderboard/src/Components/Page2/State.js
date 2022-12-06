@@ -1,12 +1,18 @@
 import React from "react";
+const { ipcRenderer } = window.require('electron');
 
-class State extends React.Component {
-  render() {
-    return <label className="container">State
-  <input type="checkbox" />
-  <span className="checkmark" />
-    </label>;
+function State() {
+
+  function sendChange() {
+    ipcRenderer.send('stateChecked')
   }
+
+
+    return (<label className="container">State
+  <input type="checkbox" onChange={sendChange}/> {}
+  <span className="checkmark" />
+    </label>)
+  
 
 }
 

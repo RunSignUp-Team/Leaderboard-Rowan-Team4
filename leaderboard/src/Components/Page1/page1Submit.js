@@ -16,6 +16,7 @@ export default function SubmitButton(props) {
     }
 
     ipcRenderer.send('storeRaces', ID);
+    ipcRenderer.send('resetResults');
   }
   
   
