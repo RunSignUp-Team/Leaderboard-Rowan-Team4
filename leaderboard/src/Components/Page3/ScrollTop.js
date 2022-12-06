@@ -10,7 +10,7 @@ export default function App() {
     <div>
       
 
-      <div style={{height: '155rem'}} />
+      <div style={{height: '10rem'}} />
 
       {/* 👇️ scroll to top on button click */}
       <button
