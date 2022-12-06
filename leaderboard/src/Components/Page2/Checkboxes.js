@@ -2,7 +2,7 @@
 import React from "react";
 import City from "./City";
 import State from "./State";
-import County from "./County";
+import Gender from "./Gender";
 import Age from "./Age";
 import Submit from "./Submit";
 
@@ -18,7 +18,7 @@ class Checkboxes extends React.Component {
   <br></br>
   <State></State>
   <br></br>
-  <County></County>
+  <Gender></Gender>
   <br></br>
   <Age></Age>
   <br />

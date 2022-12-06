@@ -12,7 +12,7 @@ function Table() {
     const [response, setResponse] = useState([]);
     const [ageStatus, setAgeStatus] = useState(0)
     const [cityStatus, setCityStatus] = useState(0)
-    const [countyStatus, setCountyStatus] = useState(0)
+    const [genderStatus, setGenderStatus] = useState(0)
     const [stateStatus, setStateStatus] = useState(0)
     
     function send(sql) {
@@ -26,7 +26,7 @@ function Table() {
         setAgeStatus(response.ageVal); 
         setStateStatus(response.stateVal);
         setCityStatus(response.cityVal);
-        setCountyStatus(response.countyVal);   
+        setGenderStatus(response.genderVal);   
       
         
     });
@@ -44,8 +44,8 @@ function Table() {
       if(cityStatus ===1) {
         message = message + ", city"
       } 
-      if(countyStatus ===1) {
-        message = message + ", county"
+      if(genderStatus ===1) {
+        message = message + ", gender"
       }
 
       message = message + " FROM Racers_Result;"
@@ -65,7 +65,7 @@ return (
           {ageStatus===1 ? <th>Age</th> : null}
           {stateStatus===1 ? <th>State</th> : null}
           {cityStatus===1 ? <th>City</th> : null}
-          {countyStatus===1 ? <th>County</th> : null}
+          {genderStatus===1 ? <th>Gender</th> : null}
         </tr>
         {response.map((val, key) => {
 
@@ -78,7 +78,7 @@ return (
                 {ageStatus===1 ? <td>{val.age}</td> : null}
                 {stateStatus===1 ? <td>{val.state}</td> : null}
                 {cityStatus===1 ? <td>{val.city}</td> : null}
-                {countyStatus===1 ? <td>{val.county}</td> : null}
+                {genderStatus===1 ? <td>{val.gender}</td> : null}
               </tr>
             )
       
