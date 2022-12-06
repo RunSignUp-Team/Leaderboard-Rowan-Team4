@@ -7,6 +7,7 @@ import Update from '../Components/Page3/Update';
 import {Font} from '../Components/Page3/Font';
 import ScrollTop from '../Components/Page3/ScrollTop';
 import AutoScroll from '../Components/Page3/AutoScroll';
+
 import SlowScroll from '../Components/Page3/SlowScroll';
 import JumpTop from '../Components/Page3/JumpTop';
 
