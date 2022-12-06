@@ -16,7 +16,7 @@ var eventID;
 
 var stateChecked = 0;
 var cityChecked = 0;
-var countyChecked = 0;
+var genderChecked = 0;
 var ageChecked = 0;
 
 function initDB() {
@@ -111,7 +111,7 @@ function getRaceResults(user, eventID) {
 
     for (let i = 0; i < user.individual_results_sets[0].num_finishers; i++){
       playerObject = (user.individual_results_sets[0].results[i]);
-      resultData[i] = [playerObject.result_id, playerObject.place, eventID, playerObject.first_name, playerObject.last_name, playerObject.chip_time, playerObject.age, playerObject.state, playerObject.county, playerObject.city];
+      resultData[i] = [playerObject.result_id, playerObject.place, eventID, playerObject.first_name, playerObject.last_name, playerObject.chip_time, playerObject.age, playerObject.state, playerObject.gender, playerObject.city];
     }
     
 }
@@ -132,7 +132,7 @@ function processResults(eventID, raceID) {
     
       // create the statement for the insertion of just ONE record
       let insertionQuery = 
-      "INSERT or ignore into Racers_Result (result_id, place, event_id, first_name, last_name, result_time, age, state, county, city ) " +
+      "INSERT or ignore into Racers_Result (result_id, place, event_id, first_name, last_name, result_time, age, state, gender, city ) " +
        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
     
       let statement = db.prepare(insertionQuery);
@@ -278,22 +278,22 @@ ipcMain.on('ageChecked', (event, arg) => {
 
 });
 
-ipcMain.on('countyChecked', (event, arg) => {
-    if (countyChecked === 0) {
-        countyChecked = 1
+ipcMain.on('genderChecked', (event, arg) => {
+    if (genderChecked === 0) {
+        genderChecked = 1
     }
     else {
-        countyChecked = 0
+        genderChecked = 0
     }
 
-    console.log('county status: ' + countyChecked)
+    console.log('gender status: ' + genderChecked)
 
 });
 
 ipcMain.on('resetCheckboxes', (event, arg) => {
     stateChecked = 0;
     cityChecked = 0;
-    countyChecked = 0;
+    genderChecked = 0;
     ageChecked = 0;
 });
 
@@ -301,7 +301,7 @@ ipcMain.on('getCheckboxValues', (event, arg) => {
     const checkboxValues = {
         ageVal : ageChecked,
         cityVal : cityChecked,
-        countyVal : countyChecked,
+        genderVal : genderChecked,
         stateVal : stateChecked
     }
 
@@ -312,7 +312,7 @@ ipcMain.on('getCheckboxValues', (event, arg) => {
 module.exports = {
     resetDB,
     cityChecked,
-    countyChecked,
+    genderChecked,
     ageChecked,
     stateChecked
 }

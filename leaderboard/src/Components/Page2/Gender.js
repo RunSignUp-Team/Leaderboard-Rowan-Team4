@@ -1,14 +1,14 @@
 import React from "react";
 const { ipcRenderer } = window.require('electron');
 
-function County() {
+function Gender() {
 
   function sendChange() {
-    ipcRenderer.send('countyChecked')
+    ipcRenderer.send('genderChecked')
   }
 
 
-    return (<label className="container">County
+    return (<label className="container">Gender
   <input type="checkbox" onChange={sendChange}/> {}
   <span className="checkmark" />
     </label>)
@@ -16,4 +16,4 @@ function County() {
 
 }
 
-export default County;
+export default Gender;
