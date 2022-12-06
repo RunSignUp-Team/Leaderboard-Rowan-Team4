@@ -16,6 +16,12 @@ const { ipcRenderer } = window.require('electron');
 function Page3() {
 
 
+    useEffect(() => {
+        SlowScroll()
+
+      }, [])
+
+
 
     return (
         <>
@@ -35,15 +41,14 @@ function Page3() {
         <h1><u>Race Results LeaderBoard</u></h1>
         </center>
 
-        <Table />
         
-        <Update />
-        <SlowScroll />
-
+        <Table />
         <ScrollTop />
         <JumpTop />
+        <Update />
         
         </div>
+
         </>
         
     );
