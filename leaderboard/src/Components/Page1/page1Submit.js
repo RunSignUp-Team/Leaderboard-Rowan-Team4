@@ -1,12 +1,8 @@
 import React, { Component, useState, useEffect, setState } from 'react';
-import sendAsync from '../../message-control/renderer';
 import { Link } from "react-router-dom";
-
 const { ipcRenderer } = window.require('electron');
 
 export default function SubmitButton(props) {
-
-
 
   function sendIDs(){
 
@@ -19,8 +15,6 @@ export default function SubmitButton(props) {
     ipcRenderer.send('resetResults');
   }
   
-  
-
     return  (
 
       <div className="pageButton">
@@ -31,5 +25,4 @@ export default function SubmitButton(props) {
       </div>
           
     );
-  
 }

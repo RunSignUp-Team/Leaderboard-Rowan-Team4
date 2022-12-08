@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 const { ipcRenderer } = window.require('electron');
 
 export default function Submit(){

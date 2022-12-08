@@ -1,10 +1,10 @@
-import { useEffect, React } from 'react';
+import { useEffect } from 'react';
 import { channels } from '../../shared/constants.js';
 const { ipcRenderer } = window.require('electron');
 
 function Update({info}) {
 
-    const THIRTY_SECONDS_MS = 10000;
+    const THIRTY_SECONDS_MS = 5000;
 
 
 
@@ -13,7 +13,7 @@ function Update({info}) {
         getResults();
       }, THIRTY_SECONDS_MS );
     
-      return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
+      return () => clearInterval(interval); 
     }, [])
     
 

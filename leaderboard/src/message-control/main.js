@@ -80,7 +80,7 @@ function processRacesAndEvents() {
     
       // create the statement for the insertion of just ONE record
       let insertionQuery = 
-        "INSERT INTO Event (race_id, event_id, event_name) " +
+        "INSERT OR IGNORE INTO Event (race_id, event_id, event_name) " +
         "VALUES (?, ?, ?)"; 
   
       
@@ -88,7 +88,7 @@ function processRacesAndEvents() {
       populate(insertionQuery, eventData, db);
   
       let insertionQuery2 =    
-      "INSERT INTO Races (race_id, race_name) " +
+      "INSERT OR IGNORE INTO Races (race_id, race_name) " +
       "VALUES (?, ?)"; 
   
       populate(insertionQuery2, raceData, db);
@@ -96,10 +96,10 @@ function processRacesAndEvents() {
 
       db.run(      `UPDATE Races SET race_name = REPLACE(race_name, '’', '');`     )
 
-      db.run('INSERT into Races (race_id, race_name) VALUES ("21", "In Person 8K Results")')
-      db.run('INSERT into Event (event_id, event_name, race_id) VALUES ("537625", "8k Event", "21")')
-      db.run('INSERT into Races (race_id, race_name) VALUES ("137710", "Rowan Test Race - Team 4")')
-      db.run('INSERT into Event (event_id, event_name, race_id) VALUES ("655875", "5k", "137710")')
+      db.run('INSERT OR IGNORE into Races (race_id, race_name) VALUES ("21", "In Person 8K Results")')
+      db.run('INSERT OR IGNORE into Event (event_id, event_name, race_id) VALUES ("537625", "8k Event", "21")')
+      db.run('INSERT OR IGNORE into Races (race_id, race_name) VALUES ("137710", "Rowan Test Race - Team 4")')
+      db.run('INSERT OR IGNORE into Event (event_id, event_name, race_id) VALUES ("655875", "5k", "137710")')
   
       db.close;
   
@@ -311,6 +311,7 @@ ipcMain.on('getCheckboxValues', (event, arg) => {
 
 module.exports = {
     resetDB,
+    processRacesAndEvents,
     cityChecked,
     genderChecked,
     ageChecked,

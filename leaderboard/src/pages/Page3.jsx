@@ -1,17 +1,11 @@
-import React, { Component, useEffect } from "react";
-import logo from '../runsignup_logo.png';
-import image from '../PinkArrow.png';
-import '../App.css';
+import React, { useEffect } from "react";
+import image from '../Images/PinkArrow.png'
+import '../CSS/App.css';
 import Table from '../Components/Page3/Table.js'
 import Update from '../Components/Page3/Update';
-import {Font} from '../Components/Page3/Font';
 import ScrollTop from '../Components/Page3/ScrollTop';
-import AutoScroll from '../Components/Page3/AutoScroll';
-
 import SlowScroll from '../Components/Page3/SlowScroll';
 import JumpTop from '../Components/Page3/JumpTop';
-
-const { ipcRenderer } = window.require('electron');
 
 
 function Page3() {
@@ -20,8 +14,9 @@ function Page3() {
     useEffect(() => {
         SlowScroll()
 
-      }, [])
+    }, [])
 
+    
 
 
     return (
@@ -42,7 +37,7 @@ function Page3() {
         <h1><u>Race Results LeaderBoard</u></h1>
         </center>
 
-        
+
         <Table />
         <ScrollTop />
         <JumpTop />
@@ -57,5 +52,5 @@ function Page3() {
     
 }
 
-export default Page3;
 
+export default Page3;

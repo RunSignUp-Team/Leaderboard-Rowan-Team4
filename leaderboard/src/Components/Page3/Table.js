@@ -1,11 +1,7 @@
-import '../../App.css';
-import React, { useState, useEffect, Com } from 'react';
-import sendAsync from '../../message-control/renderer';
-import {Font} from './Font';
-import { hasSelectionSupport } from '@testing-library/user-event/dist/utils';
+import '../../CSS/App.css';
+import React, { useState, useEffect } from 'react';
+import sendAsync from '../../Message-Control/renderer';
 const { ipcRenderer } = window.require('electron');
-
-
 
 function Table() {
 
@@ -49,6 +45,7 @@ function Table() {
       }
 
       message = message + " FROM Racers_Result;"
+      console.log(message)
       send(message);
 
 
