@@ -53,7 +53,6 @@ function getRacesAndEvents(user) {
   for (let i = 0; i < 10; i++) {
     raceObject = user.races[i];
     raceData[i] = [raceObject.race.race_id, raceObject.race.name]
-    // console.log(i + "  \nRace ID: " + raceObject.race.race_id, raceObject.race.name);
     
     // some races have multiple events, group race id and their event id's together
     // concatenating into string for console printing purposes, event id is an integer
@@ -162,7 +161,7 @@ function resetDB() {
     eventData = []
     db.close;
   
-  }
+}
 
 const database = initDB();
 
@@ -207,19 +206,8 @@ ipcMain.on('storeRaces', (event, arg) => {
     });
 })
 
-ipcMain.on(channels.GET_DATA, (event, arg) => {
-   // addTestRace();
-    processRacesAndEvents();
-    console.log("Races & Events Populated");
-});
-
-ipcMain.on(channels.RESET_DB, (event, arg) => {
-    resetDB();
-    console.log("Database Reset");
-});
 
 ipcMain.on(channels.GET_RESULTS, (event, arg) => {
-    console.log("results got")
     processResults(eventID, raceID);
 });
 
@@ -248,7 +236,6 @@ ipcMain.on('cityChecked', (event, arg) => {
         cityChecked = 0
     }
 
-    console.log('city status: ' + cityChecked)
 
 });
 
@@ -260,7 +247,6 @@ ipcMain.on('stateChecked', (event, arg) => {
         stateChecked = 0
     }
 
-    console.log('state status: ' + stateChecked)
 
 
 });
@@ -273,7 +259,6 @@ ipcMain.on('ageChecked', (event, arg) => {
         ageChecked = 0
     }
 
-    console.log('age status: ' + ageChecked)
 
 
 });
@@ -286,7 +271,6 @@ ipcMain.on('genderChecked', (event, arg) => {
         genderChecked = 0
     }
 
-    console.log('gender status: ' + genderChecked)
 
 });
 
@@ -307,6 +291,11 @@ ipcMain.on('getCheckboxValues', (event, arg) => {
 
     event.sender.send('sendCheckboxValues', checkboxValues)
 
+});
+
+ipcMain.on('scroll-window', () => {
+    // Scroll the window to the top of the page
+    window.scrollBy(0,1);
 });
 
 module.exports = {

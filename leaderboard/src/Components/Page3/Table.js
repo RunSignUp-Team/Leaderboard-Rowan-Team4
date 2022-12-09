@@ -45,11 +45,10 @@ function Table() {
       }
 
       message = message + " FROM Racers_Result;"
-      console.log(message)
-      send(message);
 
+      send(message)
 
-    }, );
+    },);
 
 
 return (
@@ -64,22 +63,24 @@ return (
           {cityStatus===1 ? <th>City</th> : null}
           {genderStatus===1 ? <th>Gender</th> : null}
         </tr>
-        {response.map((val, key) => {
+        {
 
-            return (
-              <tr key={key}>
 
-                <td>{val.place}</td>
-                <td>{val.Name}</td>
-                <td>{val.result_time}</td>
-                {ageStatus===1 ? <td>{val.age}</td> : null}
-                {stateStatus===1 ? <td>{val.state}</td> : null}
-                {cityStatus===1 ? <td>{val.city}</td> : null}
-                {genderStatus===1 ? <td>{val.gender}</td> : null}
-              </tr>
-            )
+        response.map(val =>
+            
+        <tr>
+
+          <td>{val.place}</td>
+          <td>{val.Name}</td>
+          <td>{val.result_time}</td>
+          {ageStatus===1 ? <td>{val.age}</td> : null}
+          {stateStatus===1 ? <td>{val.state}</td> : null}
+          {cityStatus===1 ? <td>{val.city}</td> : null}
+          {genderStatus===1 ? <td>{val.gender}</td> : null}
+        </tr>
+            
       
-        })}
+        )}
         
       </table>
     </div>

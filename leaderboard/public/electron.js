@@ -31,9 +31,6 @@ function createWindow() {
         mainWindow = null;
     });
 
-    mainWindow.once('did-finish-load', () => {
-        console.log("hhhh")
-     })
 }
 
 app.on('ready', () => {
