@@ -19,6 +19,8 @@ var cityChecked = 0;
 var genderChecked = 0;
 var ageChecked = 0;
 
+var resultsUpdated = 0;
+
 function initDB() {
 
   const sqlite3 = require('sqlite3').verbose();
@@ -132,8 +134,7 @@ function processResults(eventID, raceID) {
       // create the statement for the insertion of just ONE record
       let insertionQuery = 
       "INSERT or ignore into Racers_Result (result_id, place, event_id, first_name, last_name, result_time, age, state, gender, city ) " +
-       "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
-    
+       "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);" 
       let statement = db.prepare(insertionQuery);
     
       populate(insertionQuery, resultData, db);
@@ -282,21 +283,28 @@ ipcMain.on('resetCheckboxes', (event, arg) => {
 });
 
 ipcMain.on('getCheckboxValues', (event, arg) => {
+    let checked = 1;
+
     const checkboxValues = {
         ageVal : ageChecked,
         cityVal : cityChecked,
         genderVal : genderChecked,
-        stateVal : stateChecked
+        stateVal : stateChecked,
+        checkboxVal : checked
+
     }
 
     event.sender.send('sendCheckboxValues', checkboxValues)
 
 });
 
-ipcMain.on('scroll-window', () => {
-    // Scroll the window to the top of the page
-    window.scrollBy(0,1);
-});
+ipcMain.on('resultsUpdated', (event, arg) => {
+    resultsUpdated = resultsUpdated + 1;
+    event.sender.send('rerenderTable', resultsUpdated)
+
+})
+
+
 
 module.exports = {
     resetDB,

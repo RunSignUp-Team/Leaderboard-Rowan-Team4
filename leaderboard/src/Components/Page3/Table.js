@@ -12,8 +12,11 @@ function Table() {
     const [cityStatus, setCityStatus] = useState(0)
     const [genderStatus, setGenderStatus] = useState(0)
     const [stateStatus, setStateStatus] = useState(0)
+    const [updateStatus, setUpdateStatus] = useState(0)
+    const [checkboxSent, setCheckboxSent] = useState(0)
 
     
+
     function send(sql) {
         sendAsync(sql).then((result) => setResponse(result));
     }
@@ -26,12 +29,19 @@ function Table() {
         setStateStatus(response.stateVal);
         setCityStatus(response.cityVal);
         setGenderStatus(response.genderVal);   
+        setCheckboxSent(response.checkboxVal)
       
         
     });
 
+    ipcRenderer.on('rerenderTable', (event, arg) => {
+      setUpdateStatus(arg);
+    })
+
     useEffect(function () {
 
+      if(checkboxSent != 0) {
+              
       let message = "SELECT place, (first_name || ' ' || last_name) AS Name, result_time"
 
       if(ageStatus === 1) {
@@ -49,12 +59,15 @@ function Table() {
 
       message = message + " FROM Racers_Result;"
 
+
       send(message)
+      }
 
 
 
 
-    },[]);
+
+    },[updateStatus]);
 
     useEffect(function () {
       SlowScroll()

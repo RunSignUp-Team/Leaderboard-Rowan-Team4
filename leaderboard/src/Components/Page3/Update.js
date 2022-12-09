@@ -11,11 +11,8 @@ function Update({info}) {
     useEffect(() => {
       const interval = setInterval(() => {
         if(navigator.onLine) {
-          console.log("program is online")
           getResults();
-        }
-        else {
-          console.log("program is offline")
+          ipcRenderer.send('resultsUpdated')
         }
       }, THIRTY_SECONDS_MS );
     
