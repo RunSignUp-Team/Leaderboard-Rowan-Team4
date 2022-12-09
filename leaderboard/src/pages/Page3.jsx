@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import image from '../Images/PinkArrow.png'
 import '../CSS/App.css';
 import Table from '../Components/Page3/Table.js'
@@ -10,16 +10,6 @@ import Back from "../Components/Page3/Back";
 
 
 function Page3() {
-
-
-
-    useEffect(() => {
-        SlowScroll()
-
-    }, [])
-
-    
-
 
     return (
         <>

@@ -10,7 +10,13 @@ function Update({info}) {
 
     useEffect(() => {
       const interval = setInterval(() => {
-        getResults();
+        if(navigator.onLine) {
+          console.log("program is online")
+          getResults();
+        }
+        else {
+          console.log("program is offline")
+        }
       }, THIRTY_SECONDS_MS );
     
       return () => clearInterval(interval); 

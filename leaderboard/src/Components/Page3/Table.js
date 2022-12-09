@@ -1,15 +1,18 @@
 import '../../CSS/App.css';
 import React, { useState, useEffect } from 'react';
 import sendAsync from '../../Message-Control/renderer';
+import SlowScroll from './SlowScroll';
 const { ipcRenderer } = window.require('electron');
 
 function Table() {
+
 
     const [response, setResponse] = useState([]);
     const [ageStatus, setAgeStatus] = useState(0)
     const [cityStatus, setCityStatus] = useState(0)
     const [genderStatus, setGenderStatus] = useState(0)
     const [stateStatus, setStateStatus] = useState(0)
+
     
     function send(sql) {
         sendAsync(sql).then((result) => setResponse(result));
@@ -48,7 +51,17 @@ function Table() {
 
       send(message)
 
-    },);
+
+
+
+    },[]);
+
+    useEffect(function () {
+      SlowScroll()
+
+    },[]);
+
+
 
 
 return (
@@ -81,7 +94,7 @@ return (
             
       
         )}
-        
+
       </table>
     </div>
   );
