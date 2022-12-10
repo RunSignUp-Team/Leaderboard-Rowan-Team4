@@ -1,9 +1,9 @@
-import '../App.css';
+import '../CSS/App.css';
 import { useEffect } from 'react';
 import Checkboxes from '../Components/Page2/Checkboxes'
 import Body from '../Components/Page2/Body'
 import Header from '../Components/Page2/Header'
-import image from '../PinkArrow.png';
+import image from '../Images/PinkArrow.png'
 const { ipcRenderer } = window.require('electron');
 
 function Page2 () {

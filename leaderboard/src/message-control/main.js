@@ -19,6 +19,8 @@ var cityChecked = 0;
 var genderChecked = 0;
 var ageChecked = 0;
 
+var resultsUpdated = 0;
+
 function initDB() {
 
   const sqlite3 = require('sqlite3').verbose();
@@ -53,7 +55,6 @@ function getRacesAndEvents(user) {
   for (let i = 0; i < 10; i++) {
     raceObject = user.races[i];
     raceData[i] = [raceObject.race.race_id, raceObject.race.name]
-    // console.log(i + "  \nRace ID: " + raceObject.race.race_id, raceObject.race.name);
     
     // some races have multiple events, group race id and their event id's together
     // concatenating into string for console printing purposes, event id is an integer
@@ -80,7 +81,7 @@ function processRacesAndEvents() {
     
       // create the statement for the insertion of just ONE record
       let insertionQuery = 
-        "INSERT INTO Event (race_id, event_id, event_name) " +
+        "INSERT OR IGNORE INTO Event (race_id, event_id, event_name) " +
         "VALUES (?, ?, ?)"; 
   
       
@@ -88,7 +89,7 @@ function processRacesAndEvents() {
       populate(insertionQuery, eventData, db);
   
       let insertionQuery2 =    
-      "INSERT INTO Races (race_id, race_name) " +
+      "INSERT OR IGNORE INTO Races (race_id, race_name) " +
       "VALUES (?, ?)"; 
   
       populate(insertionQuery2, raceData, db);
@@ -96,10 +97,10 @@ function processRacesAndEvents() {
 
       db.run(      `UPDATE Races SET race_name = REPLACE(race_name, '’', '');`     )
 
-      db.run('INSERT into Races (race_id, race_name) VALUES ("21", "In Person 8K Results")')
-      db.run('INSERT into Event (event_id, event_name, race_id) VALUES ("537625", "8k Event", "21")')
-      db.run('INSERT into Races (race_id, race_name) VALUES ("137710", "Rowan Test Race - Team 4")')
-      db.run('INSERT into Event (event_id, event_name, race_id) VALUES ("655875", "5k", "137710")')
+      db.run('INSERT OR IGNORE into Races (race_id, race_name) VALUES ("21", "In Person 8K Results")')
+      db.run('INSERT OR IGNORE into Event (event_id, event_name, race_id) VALUES ("537625", "8k Event", "21")')
+      db.run('INSERT OR IGNORE into Races (race_id, race_name) VALUES ("137710", "Rowan Test Race - Team 4")')
+      db.run('INSERT OR IGNORE into Event (event_id, event_name, race_id) VALUES ("655875", "5k", "137710")')
   
       db.close;
   
@@ -133,8 +134,7 @@ function processResults(eventID, raceID) {
       // create the statement for the insertion of just ONE record
       let insertionQuery = 
       "INSERT or ignore into Racers_Result (result_id, place, event_id, first_name, last_name, result_time, age, state, gender, city ) " +
-       "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
-    
+       "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);" 
       let statement = db.prepare(insertionQuery);
     
       populate(insertionQuery, resultData, db);
@@ -162,7 +162,7 @@ function resetDB() {
     eventData = []
     db.close;
   
-  }
+}
 
 const database = initDB();
 
@@ -207,19 +207,8 @@ ipcMain.on('storeRaces', (event, arg) => {
     });
 })
 
-ipcMain.on(channels.GET_DATA, (event, arg) => {
-   // addTestRace();
-    processRacesAndEvents();
-    console.log("Races & Events Populated");
-});
-
-ipcMain.on(channels.RESET_DB, (event, arg) => {
-    resetDB();
-    console.log("Database Reset");
-});
 
 ipcMain.on(channels.GET_RESULTS, (event, arg) => {
-    console.log("results got")
     processResults(eventID, raceID);
 });
 
@@ -248,7 +237,6 @@ ipcMain.on('cityChecked', (event, arg) => {
         cityChecked = 0
     }
 
-    console.log('city status: ' + cityChecked)
 
 });
 
@@ -260,7 +248,6 @@ ipcMain.on('stateChecked', (event, arg) => {
         stateChecked = 0
     }
 
-    console.log('state status: ' + stateChecked)
 
 
 });
@@ -273,7 +260,6 @@ ipcMain.on('ageChecked', (event, arg) => {
         ageChecked = 0
     }
 
-    console.log('age status: ' + ageChecked)
 
 
 });
@@ -286,7 +272,6 @@ ipcMain.on('genderChecked', (event, arg) => {
         genderChecked = 0
     }
 
-    console.log('gender status: ' + genderChecked)
 
 });
 
@@ -298,19 +283,32 @@ ipcMain.on('resetCheckboxes', (event, arg) => {
 });
 
 ipcMain.on('getCheckboxValues', (event, arg) => {
+    let checked = 1;
+
     const checkboxValues = {
         ageVal : ageChecked,
         cityVal : cityChecked,
         genderVal : genderChecked,
-        stateVal : stateChecked
+        stateVal : stateChecked,
+        checkboxVal : checked
+
     }
 
     event.sender.send('sendCheckboxValues', checkboxValues)
 
 });
 
+ipcMain.on('resultsUpdated', (event, arg) => {
+    resultsUpdated = resultsUpdated + 1;
+    event.sender.send('rerenderTable', resultsUpdated)
+
+})
+
+
+
 module.exports = {
     resetDB,
+    processRacesAndEvents,
     cityChecked,
     genderChecked,
     ageChecked,

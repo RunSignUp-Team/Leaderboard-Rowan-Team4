@@ -1,9 +1,9 @@
 const electron = require('electron');
 
-require('../src/message-control/main');
+require('../src/Message-Control/main');
 
 
-const mainFile = require('../src/message-control/main')
+const mainFile = require('../src/Message-Control/main')
 
 const { app } = electron;
 const { BrowserWindow } = electron;
@@ -30,9 +30,13 @@ function createWindow() {
     mainWindow.on('closed', () => {
         mainWindow = null;
     });
+
 }
 
-app.on('ready', createWindow);
+app.on('ready', () => {
+    createWindow();
+    mainFile.processRacesAndEvents();
+});
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import sendAsync from '../../message-control/renderer';
+import sendAsync from '../../Message-Control/renderer';
 import SubmitButton from './page1Submit';
-
 
 function Dropdown() {
 
@@ -13,7 +12,6 @@ function Dropdown() {
 
     const [condition, setCondition] = useState('true')
 
-    var test;
     
     function send(sql) {
         sendAsync(sql).then((result) => setResponse(result));
@@ -26,7 +24,7 @@ function Dropdown() {
     
 
     useEffect(function () {
-        const message = 'SELECT race_name FROM Races;'
+        const message = 'SELECT race_name FROM Races ORDER BY race_name'
         send(message);
 
     }, []);

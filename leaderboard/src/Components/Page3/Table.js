@@ -1,20 +1,22 @@
-import '../../App.css';
-import React, { useState, useEffect, Com } from 'react';
-import sendAsync from '../../message-control/renderer';
-import {Font} from './Font';
-import { hasSelectionSupport } from '@testing-library/user-event/dist/utils';
+import '../../CSS/App.css';
+import React, { useState, useEffect } from 'react';
+import sendAsync from '../../Message-Control/renderer';
+import SlowScroll from './SlowScroll';
 const { ipcRenderer } = window.require('electron');
 
-
-
 function Table() {
+
 
     const [response, setResponse] = useState([]);
     const [ageStatus, setAgeStatus] = useState(0)
     const [cityStatus, setCityStatus] = useState(0)
     const [genderStatus, setGenderStatus] = useState(0)
     const [stateStatus, setStateStatus] = useState(0)
+    const [updateStatus, setUpdateStatus] = useState(0)
+    const [checkboxSent, setCheckboxSent] = useState(0)
+
     
+
     function send(sql) {
         sendAsync(sql).then((result) => setResponse(result));
     }
@@ -27,12 +29,19 @@ function Table() {
         setStateStatus(response.stateVal);
         setCityStatus(response.cityVal);
         setGenderStatus(response.genderVal);   
+        setCheckboxSent(response.checkboxVal)
       
         
     });
 
+    ipcRenderer.on('rerenderTable', (event, arg) => {
+      setUpdateStatus(arg);
+    })
+
     useEffect(function () {
 
+      if(checkboxSent != 0) {
+              
       let message = "SELECT place, (first_name || ' ' || last_name) AS Name, result_time"
 
       if(ageStatus === 1) {
@@ -49,10 +58,23 @@ function Table() {
       }
 
       message = message + " FROM Racers_Result;"
-      send(message);
 
 
-    }, );
+      send(message)
+      }
+
+
+
+
+
+    },[updateStatus]);
+
+    useEffect(function () {
+      SlowScroll()
+
+    },[]);
+
+
 
 
 return (
@@ -67,23 +89,25 @@ return (
           {cityStatus===1 ? <th>City</th> : null}
           {genderStatus===1 ? <th>Gender</th> : null}
         </tr>
-        {response.map((val, key) => {
+        {
 
-            return (
-              <tr key={key}>
 
-                <td>{val.place}</td>
-                <td>{val.Name}</td>
-                <td>{val.result_time}</td>
-                {ageStatus===1 ? <td>{val.age}</td> : null}
-                {stateStatus===1 ? <td>{val.state}</td> : null}
-                {cityStatus===1 ? <td>{val.city}</td> : null}
-                {genderStatus===1 ? <td>{val.gender}</td> : null}
-              </tr>
-            )
+        response.map(val =>
+            
+        <tr>
+
+          <td>{val.place}</td>
+          <td>{val.Name}</td>
+          <td>{val.result_time}</td>
+          {ageStatus===1 ? <td>{val.age}</td> : null}
+          {stateStatus===1 ? <td>{val.state}</td> : null}
+          {cityStatus===1 ? <td>{val.city}</td> : null}
+          {genderStatus===1 ? <td>{val.gender}</td> : null}
+        </tr>
+            
       
-        })}
-        
+        )}
+
       </table>
     </div>
   );
