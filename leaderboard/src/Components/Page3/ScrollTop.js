@@ -23,7 +23,7 @@ export default function App() {
           fontSize: '20px',
           bottom: '25px',
           right: '25px',
-          backgroundColor: '#0C9',
+          backgroundColor: '#ff43f6',
           color: '#fff',
           textAlign: 'center',
         }}

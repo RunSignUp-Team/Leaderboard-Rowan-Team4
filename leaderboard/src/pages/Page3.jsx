@@ -13,7 +13,7 @@ function Page3() {
 
     return (
         <>
-        <a href="/Page2"> <img src={image} className="BackArrow" alt="Pink Arrow" /> </a>
+
         <div className="page3format">
 
         
