@@ -2,7 +2,7 @@
 
 /*import { Redirect } from "react-router";*/
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Pages/Layout";
 import Home from "./Pages/Home";
 import Page2 from "./Pages/Page2";
@@ -12,7 +12,7 @@ import NoPage from "./Pages/NoPage";
 function App() {
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
@@ -21,7 +21,7 @@ function App() {
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   ); 
 }
 

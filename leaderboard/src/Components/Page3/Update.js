@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { channels } from '../../shared/constants.js';
 const { ipcRenderer } = window.require('electron');
 
 function Update({info}) {
@@ -23,7 +22,7 @@ function Update({info}) {
 }
 
 function getResults() {
-    ipcRenderer.send(channels.GET_RESULTS);
+    ipcRenderer.send('get_results');
 }
 
 export default Update;

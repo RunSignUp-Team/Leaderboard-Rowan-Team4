@@ -1,15 +1,12 @@
 const electron = require('electron');
 
-require('../src/Message-Control/main');
-
-
-const mainFile = require('../src/Message-Control/main')
-
 const { app } = electron;
 const { BrowserWindow } = electron;
 
 const path = require('path');
 const isDev = require('electron-is-dev');
+
+const mainFile = require(path.join(__dirname, '../public/main.js'))
 
 let mainWindow;
 

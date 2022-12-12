@@ -1,7 +1,8 @@
-const { ipcMain, ipcRenderer } = require('electron');
+const { ipcMain, ipcRenderer, app } = require('electron');
+const isDev = require('electron-is-dev');
 const sqlite3 = require('sqlite3');
 const fetch = require('electron-fetch').default
-const { channels } = require('../shared/constants');
+const path = require('path');
 
 
 const secret = "yZfkZdIlrpwhmd9IHwMcX3MBMyjkdVGe"
@@ -25,11 +26,22 @@ function initDB() {
 
   const sqlite3 = require('sqlite3').verbose();
 
-  let database = new sqlite3.Database('./public/db.db', sqlite3.OPEN_READWRITE, (err) => {
-      if (err){
-          return console.error(err.message);
-      }
-  }); 
+  let database;
+
+  if(isDev) {
+    database = new sqlite3.Database('./public/db.db', sqlite3.OPEN_READWRITE, (err) => {
+        if (err){
+            return console.error(err.message);
+        }
+    }); 
+  }
+  else {
+    database = new sqlite3.Database(path.join(__dirname, '../build/db.db'), sqlite3.OPEN_READWRITE, (err) => {
+        if (err){
+            return console.error(err.message);
+        }
+    }); 
+  }
 
   return database;
 
@@ -147,12 +159,8 @@ function processResults(eventID, raceID) {
 function resetDB() {
 
     const sqlite3 = require('sqlite3').verbose();
-  
-    let db = new sqlite3.Database('./public/db.db', sqlite3.OPEN_READWRITE, (err) => {
-        if (err){
-            return console.error(err.message);
-        }
-    }); 
+
+    db = initDB();
   
     db.run('DELETE from Races');
     db.run('DELETE from Event');
@@ -168,10 +176,10 @@ const database = initDB();
 
 
 
-ipcMain.on(channels.ASYNC_MESSAGE, (event, arg) => {
+ipcMain.on('asynchronous-message', (event, arg) => {
     const sql = arg;
     database.all(sql, (err, rows) => {
-        event.reply(channels.ASYNC_REPLY, (err && err.message) || rows);
+        event.reply('asynchronous-reply', (err && err.message) || rows);
     });
 
 
@@ -208,18 +216,14 @@ ipcMain.on('storeRaces', (event, arg) => {
 })
 
 
-ipcMain.on(channels.GET_RESULTS, (event, arg) => {
+ipcMain.on('get_results', (event, arg) => {
     processResults(eventID, raceID);
 });
 
 ipcMain.on('resetResults', (event, arg) => {
     const sqlite3 = require('sqlite3').verbose();
   
-    let db = new sqlite3.Database('./public/db.db', sqlite3.OPEN_READWRITE, (err) => {
-        if (err){
-            return console.error(err.message);
-        }
-    }); 
+    db = initDB();
 
     db.run('DELETE from Racers_result')
 
