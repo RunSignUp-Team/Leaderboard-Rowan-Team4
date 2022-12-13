@@ -64,7 +64,7 @@ function populate(insertionQuery, array, db) {
 function getRacesAndEvents(user) {
 
   // can display id's for 50 races, 10 for testing purposes
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 50; i++) {
     raceObject = user.races[i];
     raceData[i] = [raceObject.race.race_id, raceObject.race.name]
     

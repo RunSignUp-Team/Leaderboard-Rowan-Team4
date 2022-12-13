@@ -18,8 +18,10 @@ function Page2 () {
     return (
       <>
     <Link to="/">
-      <img src={image} className="BackArrow" alt="Pink Arrow" />
-    </Link>      <div className="page2format">
+      <img src={image} className="BackArrow" alt="Pink Arrow" style={{position: 'fixed',top: '20px',left: '20px'}} />
+    </Link>      
+    
+    <div className="page2format">
         <br>
         </br>
         <Header />
@@ -34,6 +36,9 @@ function Page2 () {
         <br/>
         <br/>
         <br/>
+        <br />
+        <br />
+        <hr style={{height:"3px", visibility: "hidden"}} />
         
         
       </div>
