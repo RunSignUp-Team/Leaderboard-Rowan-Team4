@@ -4,6 +4,7 @@ import Checkboxes from '../Components/Page2/Checkboxes'
 import Body from '../Components/Page2/Body'
 import Header from '../Components/Page2/Header'
 import image from '../Images/PinkArrow.png'
+import { Link } from 'react-router-dom';
 const { ipcRenderer } = window.require('electron');
 
 function Page2 () {
@@ -16,8 +17,9 @@ function Page2 () {
 
     return (
       <>
-      <a href="/"> <img src={image} className="BackArrow" alt="Pink Arrow" /> </a>
-      <div className="page2format">
+    <Link to="/">
+      <img src={image} className="BackArrow" alt="Pink Arrow" />
+    </Link>      <div className="page2format">
         <br>
         </br>
         <Header />

@@ -1,10 +1,9 @@
 import { useEffect } from 'react';
-import { channels } from '../../shared/constants.js';
 const { ipcRenderer } = window.require('electron');
 
 function Update({info}) {
 
-    const THIRTY_SECONDS_MS = 5000;
+    const FIVE_SECONDS_MS = 5000;
 
 
 
@@ -14,7 +13,7 @@ function Update({info}) {
           getResults();
           ipcRenderer.send('resultsUpdated')
         }
-      }, THIRTY_SECONDS_MS );
+      }, FIVE_SECONDS_MS );
     
       return () => clearInterval(interval); 
     }, [])
@@ -23,7 +22,7 @@ function Update({info}) {
 }
 
 function getResults() {
-    ipcRenderer.send(channels.GET_RESULTS);
+    ipcRenderer.send('get_results');
 }
 
 export default Update;

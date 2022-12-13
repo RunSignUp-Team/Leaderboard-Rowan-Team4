@@ -1,8 +1,10 @@
 {
   "name": "leaderboard",
+  "productName": "RSU-Leaderboard",
   "version": "0.1.0",
   "private": true,
   "main": "public/electron.js",
+  "homepage": "./",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -40,6 +42,7 @@
     "eject": "react-scripts eject",
     "electron-dev": "concurrently \"set BROWSER=none&&npm start\" \"wait-on http://localhost:3000 && electron .\""
   },
+
   "eslintConfig": {
     "extends": [
       "react-app",
